@@ -18,7 +18,7 @@ int decrypt() {
 		string fileLocation;
 		cout << "What is the name or path of the text file" << endl;
 		cin >> fileLocation;
-		cout << "Please enter the decryption key to decrypt the text file?" << endl;
+		cout << "Please enter the decryption key in number form to decrypt the text file?" << endl;
 		cin >> key;
 		fstream FileToDecrypt;
 		FileToDecrypt.open(fileLocation, ios::in);
@@ -69,7 +69,7 @@ int decrypt() {
 	if (type == "message" || type == "Message") {
 		cout << "Please enter a message to decrypt?" << endl;
 		getline(cin, message);
-		cout << "Please enter a decryption key to decrypt the message?" << endl;
+		cout << "Please enter a decryption key in number form to decrypt the message?" << endl;
 		cin >> key;
 		for (int i = 0; i < message.size(); i++) {
 			size_t letterPos = alphabet.find(message[i]);
@@ -87,6 +87,10 @@ int decrypt() {
 			}
 		}
 		cout << "Your decrypted message is '" + newMessage + "'. Press ENTER to exit" << endl;
+	}
+	else {
+		cout << "Unrecognized Option: '" + type + "'. ";
+		decrypt();
 	}
 	return 0;
 }

@@ -18,7 +18,7 @@ int encrypt() {
 		string fileLocation;
 		cout << "What is the name or path of the text file" << endl;
 		cin >> fileLocation;
-		cout << "Please enter a encryption key to encrypt the text file?" << endl;
+		cout << "Please enter a encryption key in number form to encrypt the text file?" << endl;
 		cin >> key;
 		fstream FileToEncrypt;
 		FileToEncrypt.open(fileLocation, ios::in);
@@ -69,7 +69,7 @@ int encrypt() {
 	if (type == "message" || type == "Message") {
 		cout << "Please enter a message to encrypt?" << endl;
 		getline(cin, message);
-		cout << "Please enter a encryption key to encrypt the message?" << endl;
+		cout << "Please enter a encryption key in number form to encrypt the message?" << endl;
 		cin >> key;
 		for (int i = 0; i < message.size(); i++) {
 			size_t letterPos = alphabet.find(message[i]);
@@ -87,6 +87,10 @@ int encrypt() {
 			}
 		}
 		cout << "Your encrypted message is '" + newMessage + "'. Press ENTER to exit" << endl;
+	}
+	else {
+		cout << "Unrecognized Option: '" + type + "'. ";
+		encrypt();
 	}
 	return 0;
 }

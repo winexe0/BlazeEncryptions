@@ -20,6 +20,10 @@ int main(int argc, char** argv) {
 	if (crypt == "decrypt") {
 		decrypt();
 	}
+	else {
+		cout << "Unrecognized Option: '" + crypt + "'. ";
+		main(NULL, NULL);
+	}
 	cin.ignore();
 	cin.get();
 }
