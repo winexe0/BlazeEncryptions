@@ -86,7 +86,7 @@ int encrypt() {
 				newMessage += newCharacter;
 			}
 		}
-		cout << "Your encrypted message is '" + newMessage + "'" << endl;
+		cout << "Your encrypted message is '" + newMessage + "'. Press ENTER to exit" << endl;
 	}
 	return 0;
 }

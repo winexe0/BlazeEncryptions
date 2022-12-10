@@ -20,6 +20,8 @@ int main(int argc, char** argv) {
 	if (crypt == "decrypt") {
 		decrypt();
 	}
+	cin.ignore();
+	cin.get();
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

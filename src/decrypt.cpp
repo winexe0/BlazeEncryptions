@@ -86,7 +86,7 @@ int decrypt() {
 				newMessage += newCharacter;
 			}
 		}
-		cout << "Your decrypted message is '" + newMessage + "'" << endl;
+		cout << "Your decrypted message is '" + newMessage + "'. Press ENTER to exit" << endl;
 	}
 	return 0;
 }
