@@ -16,16 +16,16 @@ int main(int argc, char** argv) {
 	cin >> crypt;
 	if (crypt == "encrypt") {
 		encrypt();
+		return 0;
 	}
 	if (crypt == "decrypt") {
 		decrypt();
+		return 0;
 	}
 	else {
 		cout << "Unrecognized Option: '" + crypt + "'. ";
 		main(NULL, NULL);
 	}
-	cin.ignore();
-	cin.get();
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

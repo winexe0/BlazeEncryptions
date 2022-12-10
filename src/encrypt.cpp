@@ -9,6 +9,7 @@
 using namespace std;
 int encrypt() {
 	string alphabet = "abcdefghijklmnopqrstuvwxyz";
+	string ualphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	string newMessage, message, type;
 	int key;
 	cout << "Do you want to encrypt a text file or a message" << endl;
@@ -37,7 +38,8 @@ int encrypt() {
 					FileToEncryptContents += v;
 				for (int i = 0; i < FileToEncryptContents.size(); i++) {
 					size_t letterPos = alphabet.find(FileToEncryptContents[i]);
-					if (letterPos == string::npos) {
+					size_t letterPosU = ualphabet.find(FileToEncryptContents[i]);
+					if (letterPos == string::npos && letterPosU == string::npos) {
 						newMessage += FileToEncryptContents[i];
 					}
 					if (letterPos != string::npos) {
@@ -49,6 +51,15 @@ int encrypt() {
 						int newCharacter = alphabet[newPosition];
 						newMessage += newCharacter;
 					}
+					if (letterPosU != string::npos) {
+						int newPosition;
+						newPosition = letterPosU + key;
+						if (newPosition > ualphabet.size()) {
+							newPosition = newPosition - ualphabet.size();
+						}
+						int newCharacter = ualphabet[newPosition];
+						newMessage += newCharacter;
+					}
 				}
 			}
 		fstream EncryptedFile;
@@ -57,6 +68,7 @@ int encrypt() {
 			cout << "Could not create the encrypted file. Here is the encrypted text file '" + newMessage + "'. Press ENTER to exit";
 			cin.ignore();
 			cin.get();
+			return 0;
 		}
 		else {
 			EncryptedFile << newMessage;
@@ -64,6 +76,7 @@ int encrypt() {
 			cout << "Your Encrypted File is saved to " + fileLocation + "-Encrypted. Press ENTER to exit";
 			cin.ignore();
 			cin.get();
+			return 0;
 		}
 	}
 	if (type == "message" || type == "Message") {
@@ -73,7 +86,8 @@ int encrypt() {
 		cin >> key;
 		for (int i = 0; i < message.size(); i++) {
 			size_t letterPos = alphabet.find(message[i]);
-			if (letterPos == string::npos) {
+			size_t letterPosU = ualphabet.find(message[i]);
+			if (letterPos == string::npos && letterPosU == string::npos) {
 				newMessage += message[i];
 			}
 			if (letterPos != string::npos) {
@@ -85,8 +99,20 @@ int encrypt() {
 				int newCharacter = alphabet[newPosition];
 				newMessage += newCharacter;
 			}
+			if (letterPosU != string::npos) {
+				int newPosition;
+				newPosition = letterPosU + key;
+				if (newPosition > ualphabet.size()) {
+					newPosition = newPosition - ualphabet.size();
+				}
+				int newCharacter = ualphabet[newPosition];
+				newMessage += newCharacter;
+			}
 		}
 		cout << "Your encrypted message is '" + newMessage + "'. Press ENTER to exit" << endl;
+		cin.ignore();
+		cin.get();
+		return 0;
 	}
 	else {
 		cout << "Unrecognized Option: '" + type + "'. ";

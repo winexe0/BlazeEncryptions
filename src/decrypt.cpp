@@ -9,6 +9,7 @@
 using namespace std;
 int decrypt() {
 	string alphabet = "abcdefghijklmnopqrstuvwxyz";
+	string ualphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	string newMessage, message, type;
 	int key;
 	cout << "Do you want to decrypt a text file or a message" << endl;
@@ -37,7 +38,8 @@ int decrypt() {
 					FileToDecryptContents += v;
 				for (int i = 0; i < FileToDecryptContents.size(); i++) {
 					size_t letterPos = alphabet.find(FileToDecryptContents[i]);
-					if (letterPos == string::npos) {
+					size_t letterPosU = ualphabet.find(FileToDecryptContents[i]);
+					if (letterPos == string::npos && letterPosU == string::npos) {
 						newMessage += FileToDecryptContents[i];
 					}
 					if (letterPos != string::npos) {
@@ -49,6 +51,15 @@ int decrypt() {
 						int newCharacter = alphabet[newPosition];
 						newMessage += newCharacter;
 					}
+					if (letterPosU != string::npos) {
+						int newPosition;
+						newPosition = letterPosU - key;
+						if (newPosition < 0) {
+							newPosition = newPosition + ualphabet.size();
+						}
+						int newCharacter = ualphabet[newPosition];
+						newMessage += newCharacter;
+					}
 				}
 			}
 		fstream DecryptedFile;
@@ -57,6 +68,7 @@ int decrypt() {
 			cout << "Could not create the decrypted file. Here is the decrypted text file '" + newMessage + "'. Press ENTER to exit";
 			cin.ignore();
 			cin.get();
+			return 0;
 		}
 		else {
 			DecryptedFile << newMessage;
@@ -64,6 +76,7 @@ int decrypt() {
 			cout << "Your Decrypted File is saved to " + fileLocation + "-Decrypted. Press ENTER to exit";
 			cin.ignore();
 			cin.get();
+			return 0;
 		}
 	}
 	if (type == "message" || type == "Message") {
@@ -73,7 +86,8 @@ int decrypt() {
 		cin >> key;
 		for (int i = 0; i < message.size(); i++) {
 			size_t letterPos = alphabet.find(message[i]);
-			if (letterPos == string::npos) {
+			size_t letterPosU = ualphabet.find(message[i]);
+			if (letterPos == string::npos && letterPosU == string::npos) {
 				newMessage += message[i];
 			}
 			if (letterPos != string::npos) {
@@ -85,8 +99,20 @@ int decrypt() {
 				int newCharacter = alphabet[newPosition];
 				newMessage += newCharacter;
 			}
+			if (letterPosU != string::npos) {
+				int newPosition;
+				newPosition = letterPosU - key;
+				if (newPosition < 0) {
+					newPosition = ualphabet.size() + newPosition;
+				}
+				int newCharacter = ualphabet[newPosition];
+				newMessage += newCharacter;
+			}
 		}
 		cout << "Your decrypted message is '" + newMessage + "'. Press ENTER to exit" << endl;
+		cin.ignore();
+		cin.get();
+		return 0;
 	}
 	else {
 		cout << "Unrecognized Option: '" + type + "'. ";
