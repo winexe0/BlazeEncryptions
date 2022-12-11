@@ -10,12 +10,11 @@ using namespace std;
 int decrypt() {
 	string alphabet = "abcdefghijklmnopqrstuvwxyz";
 	string ualphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	string newMessage, message, type;
-	int key;
-	cout << "Do you want to decrypt a text file or a message" << endl;
-	cin.ignore();
-	getline(cin, type);
-	if (type == "text file" || type == "Text File" || type == "File" || type == "file") {
+	string newMessage, message;
+	int key, type;
+	cout << "Do you want to\n1. Decrypt a text file\n2. Decrypt a message\nPlease type 1 or 2 and press enter." << endl;
+	cin >> type;
+	if (type == 1) {
 		string fileLocation;
 		cout << "What is the name or path of the text file" << endl;
 		cin >> fileLocation;
@@ -79,8 +78,9 @@ int decrypt() {
 			return 0;
 		}
 	}
-	if (type == "message" || type == "Message") {
+	if (type == 2) {
 		cout << "Please enter a message to decrypt?" << endl;
+		cin.ignore();
 		getline(cin, message);
 		cout << "Please enter a decryption key in number form to decrypt the message?" << endl;
 		cin >> key;
@@ -115,7 +115,7 @@ int decrypt() {
 		return 0;
 	}
 	else {
-		cout << "Unrecognized Option: '" + type + "'. ";
+		cout << "Unrecognized Option: '" + to_string(type) + "'. ";
 		decrypt();
 	}
 	return 0;
