@@ -62,7 +62,26 @@ int decrypt() {
 				}
 			}
 		fstream DecryptedFile;
-		DecryptedFile.open(fileLocation + "-Decrypted", ios::out);
+		size_t DotPos = fileLocation.find('.');
+		string Final;
+		if (DotPos != string::npos) {
+			fileLocation[DotPos] = '-';
+			if (fileLocation[DotPos + 1] == 't') {
+				fileLocation[DotPos + 1] = 'D';
+				if (fileLocation[DotPos + 2] == 'x') {
+					fileLocation[DotPos + 2] = 'e';
+					if (fileLocation[DotPos + 3] == 't') {
+						fileLocation[DotPos + 3] = 'c';
+						DecryptedFile.open(fileLocation + "rypted.txt", ios::out);
+						Final = fileLocation + "rypted.txt";
+					}
+				}
+			}
+		}
+		if (DotPos == string::npos) {
+			DecryptedFile.open(fileLocation + "-Decrypted", ios::out);
+			Final = fileLocation + "-Decrypted";
+		}
 		if (!DecryptedFile) {
 			cout << "Could not create the decrypted file. Here is the decrypted text file '" + newMessage + "'. Press ENTER to exit";
 			cin.ignore();
@@ -72,7 +91,7 @@ int decrypt() {
 		else {
 			DecryptedFile << newMessage;
 			DecryptedFile.close();
-			cout << "Your Decrypted File is saved to " + fileLocation + "-Decrypted. Press ENTER to exit";
+			cout << "Your Decrypted File is saved to " + Final + ". Press ENTER to exit";
 			cin.ignore();
 			cin.get();
 			return 0;
