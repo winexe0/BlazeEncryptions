@@ -47,6 +47,9 @@ int encrypt() {
 						if (newPosition > alphabet.size()) {
 							newPosition = newPosition - alphabet.size();
 						}
+						if (newPosition == 26) {
+							newPosition = 0;
+						}
 						int newCharacter = alphabet[newPosition];
 						newMessage += newCharacter;
 					}
@@ -55,6 +58,9 @@ int encrypt() {
 						newPosition = letterPosU + key;
 						if (newPosition > ualphabet.size()) {
 							newPosition = newPosition - ualphabet.size();
+						}
+						if (newPosition == 26) {
+							newPosition = 0;
 						}
 						int newCharacter = ualphabet[newPosition];
 						newMessage += newCharacter;
@@ -115,6 +121,9 @@ int encrypt() {
 				if (newPosition > alphabet.size()) {
 					newPosition = newPosition - alphabet.size();
 				}
+				if (newPosition == 26) {
+					newPosition = 0;
+				}
 				int newCharacter = alphabet[newPosition];
 				newMessage += newCharacter;
 			}
@@ -123,6 +132,9 @@ int encrypt() {
 				newPosition = letterPosU + key;
 				if (newPosition > ualphabet.size()) {
 					newPosition = newPosition - ualphabet.size();
+				}
+				if (newPosition == 26) {
+					newPosition = 0;
 				}
 				int newCharacter = ualphabet[newPosition];
 				newMessage += newCharacter;
