@@ -7,26 +7,23 @@
 #include <iterator>
 #include <sstream>
 #include "split.h"
-#include "encrypt.h"
-#include "decrypt.h"
+#include "new/new.h"
+#include "old/old.h"
 using namespace std;
 int main(int argc, char** argv) {
-	int crypt;
-	cout << "What would you like to do\n1. Encrypt\n2. Decrypt\n3. Quit The Program\nPlease type 1, 2, or 3 and press enter." << endl;
-	cin >> crypt;
-	if (crypt == 1) {
-		encrypt();
+	int cryptMethod;
+	cout << "Which Encryption Method would you like to use:\n1. Newer Encryption Method (More Secure, but not compatible with BlazeEncryptions v1.x)\n2. Older Encryption Method (Less Secure, but compatible with BlazeEncryptions v1.x)\nPlease type 1 or 2 and press enter." << endl;
+	cin >> cryptMethod;
+	if (cryptMethod == 1) {
+		New();
 		return 0;
 	}
-	if (crypt == 2) {
-		decrypt();
-		return 0;
-	}
-	if (crypt == 3) {
+	if (cryptMethod == 2) {
+		old();
 		return 0;
 	}
 	else {
-		cout << "Unrecognized Option: '" + to_string(crypt) + "'. \n";
+		cout << "Unrecognized Option: '" + to_string(cryptMethod) + "'. \n";
 		main(NULL, NULL);
 	}
 }
