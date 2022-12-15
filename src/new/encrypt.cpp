@@ -4,7 +4,7 @@
 #include <fstream>
 #include <iterator>
 #include <sstream>
-#include "..\split.h"
+#include "../split.h"
 #include "encrypt.h"
 int Newencrypt() {
 	string alphabet = "abcdefghijklmnopqrstuvwxyz";
