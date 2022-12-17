@@ -39,10 +39,16 @@ jobs:
       run: cmake --build ${{github.workspace}}/buildarm64 --config ${{env.BUILD_TYPE}}
       
     - name: Gzip Binaries
-      run: tar -cvPzf ${{github.workspace}}/build/BlazeEncryptionsx86_64.tar.gz ${{github.workspace}}/build/BlazeEncryptions && tar -cvPzf ${{github.workspace}}/buildarm64/BlazeEncryptionsaarch64.tar.gz ${{github.workspace}}/buildarm64/BlazeEncryptions
+      run: cd ${{github.workspace}}/build && tar -cvPzf BlazeEncryptionsx86_64.tar.gz BlazeEncryptions && cd ../buildarm64 && tar -cvPzf BlazeEncryptionsaarch64.tar.gz BlazeEncryptions
 
+    - name: Attach x86_64 Binary
     - uses: actions/upload-artifact@v3.1.1
       with :
-        name: Upload Builds
-        path: ${{github.workspace}}/build*/*.tar.gz 
-
+        name: BlazeEncryptions-${{ env.APK_BASENAME_PREFIX }}-x86_64
+        path: ${{github.workspace}}/build/BlazeEncryptionsx86_64.tar.gz
+        
+    - name: Attach ARM64 Binary
+    - uses: actions/upload-artifact@v3.1.1
+      with :
+        name: BlazeEncryptions-${{ env.APK_BASENAME_PREFIX }}-ARM64
+        path: ${{github.workspace}}/build/BlazeEncryptionsaarch64.tar.gz
