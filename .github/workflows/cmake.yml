@@ -29,7 +29,7 @@ jobs:
       run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
       
     - name: Configure CMake (ARM64)
-      run: cmake -B ${{github.workspace}}/buildarm64 -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_CXX_COMPILER=aarch64-linux-gnu-gcc
+      run: cmake -B ${{github.workspace}}/buildarm64 -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_CXX_COMPILER=aarch64-linux-gnu-g++
 
     - name: Build
       # Build your program with the given configuration
