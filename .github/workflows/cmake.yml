@@ -44,5 +44,5 @@ jobs:
     - uses: actions/upload-artifact@v3.1.1
       with :
         name: Upload Builds
-        path: ${{github.workspace}}/build/BlazeEncryptionsx86_64.tar.gz ${{github.workspace}}/buildarm64/BlazeEncryptionsaarch64.tar.gz
+        path: ${{github.workspace}}/build*/*.tar.gz 
 
