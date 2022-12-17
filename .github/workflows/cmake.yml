@@ -39,7 +39,7 @@ jobs:
       run: cmake --build ${{github.workspace}}/buildarm64 --config ${{env.BUILD_TYPE}}
       
     - name: Gzip Binaries
-      run: tar -cvzf ${{github.workspace}}/build/BlazeEncryptionsx86_64.tar.gz ${{github.workspace}}/build/BlazeEncryptions && tar -cvzf ${{github.workspace}}/buildarm64/BlazeEncryptionsaarch64.tar.gz ${{github.workspace}}/buildarm64/BlazeEncryptions
+      run: tar -cvPzf ${{github.workspace}}/build/BlazeEncryptionsx86_64.tar.gz ${{github.workspace}}/build/BlazeEncryptions && tar -cvPzf ${{github.workspace}}/buildarm64/BlazeEncryptionsaarch64.tar.gz ${{github.workspace}}/buildarm64/BlazeEncryptions
 
     - uses: actions/upload-artifact@v3.1.1
       with :
