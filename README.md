@@ -1,4 +1,6 @@
 # BlazeEncryptions
+[![Build](https://github.com/winexe0/BlazeEncryptions/actions/workflows/cmake.yml/badge.svg)](https://github.com/winexe0/BlazeEncryptions/actions/workflows/cmake.yml)
+
 A Program which encrypts or decrypts text files or messages.
 # Building
 # Linux
