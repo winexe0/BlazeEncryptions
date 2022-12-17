@@ -19,19 +19,30 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    
+    - name: Install ARM64 Dependencies
+      run: sudo apt install gcc-aarch64-linux-gnu
 
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
       run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+      
+    - name: Configure CMake (ARM64)
+      run: cmake -B ${{github.workspace}}/buildarm64 -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_CXX_COMPILER=aarch64-linux-gnu-gcc
 
     - name: Build
       # Build your program with the given configuration
       run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+      
+    - name: Build (ARM64)
+      run: cmake --build ${{github.workspace}}/buildarm64 --config ${{env.BUILD_TYPE}}
+      
+    - name: Gzip Binaries
+      run: tar -cvzf ${{github.workspace}}/build/BlazeEncryptionsx86_64.tar.gz BlazeEncryptions && tar -cvzf ${{github.workspace}}/buildarm64/BlazeEncryptionsaarch64.tar.gz BlazeEncryptions
 
-    - name: Test
-      working-directory: ${{github.workspace}}/build
-      # Execute tests defined by the CMake configuration.
-      # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
-      run: ctest -C ${{env.BUILD_TYPE}}
+    - uses: actions/upload-artifact@v3.1.1
+      with :
+        name: Upload Builds
+        path: ${{github.workspace}}/build/BlazeEncryptionsx86_64.tar.gz ${{github.workspace}}/buildarm64/BlazeEncryptionsaarch64.tar.gz
 
