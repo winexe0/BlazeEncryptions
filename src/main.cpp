@@ -1,5 +1,6 @@
 // main.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
+#define VERSION "BlazeEncryptions v1.1.2"
 #include <iostream>
 #include <string>
 #include <vector>
@@ -12,6 +13,7 @@
 using namespace std;
 int main(int argc, char** argv) {
 	int crypt;
+	cout << VERSION << endl;
 	cout << "What would you like to do\n1. Encrypt\n2. Decrypt\n3. Quit The Program\nPlease type 1, 2, or 3 and press enter." << endl;
 	cin >> crypt;
 	if (crypt == 1) {
