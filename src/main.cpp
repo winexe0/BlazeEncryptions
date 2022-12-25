@@ -21,7 +21,7 @@ Options: --old (Uses the older Encryption/Decryption method for compatibility wi
 #include "old/encrypt.h"
 using namespace std;
 int main(int argc, char** argv) {
-	int cryptMethod;
+	string cryptMethod;
 	for (int i = 1; i < argc; ++i) {
 		string arg = argv[i];
 		if (arg == "--help" || arg == "-h") {
@@ -45,11 +45,11 @@ int main(int argc, char** argv) {
 		if (arg == "--encrypt") {
 			cout << "Which Encryption Method would you like to use:\n1. Newer Encryption Method (More Secure, but not compatible with BlazeEncryptions v1.x)\n2. Older Encryption Method (Less Secure, but compatible with BlazeEncryptions v1.x)\nPlease type 1 or 2 and press enter." << endl;
 			cin >> cryptMethod;
-			if (cryptMethod == 1) {
+			if (stoi(cryptMethod) == 1) {
 				Newencrypt();
 				return 0;
 			}
-			if (cryptMethod == 2) {
+			if (stoi(cryptMethod) == 2) {
 				encrypt();
 				return 0;
 			}
@@ -57,11 +57,11 @@ int main(int argc, char** argv) {
 		if (arg == "--decrypt") {
 			cout << "Are you decrypting for:\n1. The Newer Encryption Method \n2. The Older Encryption Method\nPlease type 1 or 2 and press enter." << endl;
 			cin >> cryptMethod;
-			if (cryptMethod == 1) {
+			if (stoi(cryptMethod) == 1) {
 				Newencrypt();
 				return 0;
 			}
-			if (cryptMethod == 2) {
+			if (stoi(cryptMethod) == 2) {
 				encrypt();
 				return 0;
 			}
@@ -79,16 +79,16 @@ int main(int argc, char** argv) {
 	cout << VERSION << endl;
 	cout << "Which Encryption Method would you like to use:\n1. Newer Encryption Method (More Secure, but not compatible with BlazeEncryptions v1.x)\n2. Older Encryption Method (Less Secure, but compatible with BlazeEncryptions v1.x)\nPlease type 1 or 2 and press enter." << endl;
 	cin >> cryptMethod;
-	if (cryptMethod == 1) {
+	if (cryptMethod == "1") {
 		New();
 		return 0;
 	}
-	if (cryptMethod == 2) {
+	if (cryptMethod == "2") {
 		old();
 		return 0;
 	}
 	else {
-		cout << "Unrecognized Option: '" + to_string(cryptMethod) + "'. \n";
+		cout << "Unrecognized Option: '" + cryptMethod + "'. \n";
 		main(NULL, NULL);
 	}
 }
