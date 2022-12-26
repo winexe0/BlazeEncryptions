@@ -1,6 +1,6 @@
 // main.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
-#define VERSION "BlazeEncryptions v2.0"
+#define VERSION "BlazeEncryptions v2.0.5"
 #define USAGE "\
 Usage: BlazeEncryptions [--old] [--new] [--encrypt] [--decrypt] [--keygen] [-h] [--help] [--version]\n\
 Options: --old (Uses the older Encryption/Decryption method for compatibility with BlazeEncryptions v1.x and less secure) --new (Uses the Newer Encryption/Decryption method which is more secure but not compatible with v1.x) --encrypt (Encrypt a message) --decrypt (Decrypt a message) --help or -h (Prints this exact messaage) --version (Prints out the version of this Scalc binary)"
