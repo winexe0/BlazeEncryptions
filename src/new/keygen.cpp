@@ -38,22 +38,22 @@ int keygen() {
 		key << tempRandTotal;
 		key.close();
 	}
-		if (keyNum == 1) {
-			cout << to_string(keyNum) + " key have been successfully generated with capability to encrypt messages up to " + to_string(length) + " characters long with the name of the key being " + keyName + ".txt. Press ENTER to exit." << endl;
-		}
-		else {
-			cout << to_string(keyNum) + " keys have been successfully generated with capability to encrypt messages up to " + to_string(length) + " characters long with the name of the keys being ";
-			for (int i = 0; i < keyNum; i++) {
-				if (keyNum != (i + 1)) {
-					cout << keyName + to_string(i) + ".txt and ";
-				}
-				if (keyNum == (i + 1)) {
-					cout << keyName + to_string(i) + ".txt.";
-				}
+	if (keyNum == 1) {
+		cout << to_string(keyNum) + " key have been successfully generated with capability to encrypt messages up to " + to_string(length) + " characters long with the name of the key being " + keyName + ".txt. This can be found at the same directory that BlazeEncryptions was run. Press ENTER to exit." << endl;
+	}
+	else {
+		cout << to_string(keyNum) + " keys have been successfully generated with capability to encrypt messages up to " + to_string(length) + " characters long with the name of the keys being ";
+		for (int i = 0; i < keyNum; i++) {
+			if (keyNum != (i + 1)) {
+				cout << keyName + to_string(i) + ".txt and ";
 			}
-			cout << " Press ENTER to exit." << endl;
+			if (keyNum == (i + 1)) {
+				cout << keyName + to_string(i) + ".txt.";
+			}
 		}
-		cin.get();
-		cin.ignore();
+		cout << " This can be found at the same directory that BlazeEncryptions was run. Press ENTER to exit." << endl;
+	}
+	cin.get();
+	cin.ignore();
 	return 0;
 }
