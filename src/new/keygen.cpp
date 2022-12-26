@@ -1,3 +1,6 @@
+#define SUCCESSGEN " have been successfully generated with capability to encrypt messages up to "
+#define CHARLONG " characters long with the name of the "
+#define SAMEDIREXIT " This can be found at the same directory that BlazeEncryptions was run. Press ENTER to exit."
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -39,10 +42,10 @@ int keygen() {
 		key.close();
 	}
 	if (keyNum == 1) {
-		cout << to_string(keyNum) + " key have been successfully generated with capability to encrypt messages up to " + to_string(length) + " characters long with the name of the key being " + keyName + ".txt. This can be found at the same directory that BlazeEncryptions was run. Press ENTER to exit." << endl;
+		cout << to_string(keyNum) + " key" + SUCCESSGEN + to_string(length) + CHARLONG + "key being " + keyName + ".txt." + SAMEDIREXIT << endl;
 	}
 	else {
-		cout << to_string(keyNum) + " keys have been successfully generated with capability to encrypt messages up to " + to_string(length) + " characters long with the name of the keys being ";
+		cout << to_string(keyNum) + " keys" + SUCCESSGEN + to_string(length) + CHARLONG + "keys being ";
 		for (int i = 0; i < keyNum; i++) {
 			if (keyNum != (i + 1)) {
 				cout << keyName + to_string(i) + ".txt and ";
@@ -51,7 +54,7 @@ int keygen() {
 				cout << keyName + to_string(i) + ".txt.";
 			}
 		}
-		cout << " This can be found at the same directory that BlazeEncryptions was run. Press ENTER to exit." << endl;
+		cout << SAMEDIREXIT << endl;
 	}
 	cin.get();
 	cin.ignore();
