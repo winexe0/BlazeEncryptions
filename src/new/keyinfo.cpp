@@ -11,6 +11,8 @@ int keyinfo() {
 	fstream keyExist;
 	keyExist.open(keyName, ios::in);
 	if (!keyExist) {
+		keyExist.open(keyName + ".txt", ios::in);
+		keyName = keyName + ".txt";
 		while (!keyExist) {
 			cout << "Your key doesn't exist. Please enter an existing key to analyze" << endl;
 			cin >> keyName;

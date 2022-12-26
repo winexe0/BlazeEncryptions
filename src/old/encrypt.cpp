@@ -89,7 +89,7 @@ int encrypt() {
 			Final = fileLocation + "-Encrypted";
 		}
 		if (!EncryptedFile) {
-			cout << "Could not create the encrypted file. Here is the encrypted text file '" + newMessage + "'. Press ENTER to exit";
+			cout << "Could not create the encrypted file. Here is the encrypted text file '" + newMessage + "'\nPress ENTER to exit";
 			cin.ignore();
 			cin.get();
 			return 0;
@@ -97,7 +97,7 @@ int encrypt() {
 		else {
 			EncryptedFile << newMessage;
 			EncryptedFile.close();
-			cout << "Your Encrypted File is saved to " + Final + ". Press ENTER to exit";
+			cout << "Your Encrypted File is saved to " + Final + "\nPress ENTER to exit";
 			cin.ignore();
 			cin.get();
 			return 0;
@@ -140,7 +140,7 @@ int encrypt() {
 				newMessage += newCharacter;
 			}
 		}
-		cout << "Your encrypted message is '" + newMessage + "'. Press ENTER to exit" << endl;
+		cout << "Your encrypted message is '" + newMessage + "'\nPress ENTER to exit" << endl;
 		cin.ignore();
 		cin.get();
 		return 0;

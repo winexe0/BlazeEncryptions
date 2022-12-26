@@ -89,7 +89,7 @@ int decrypt() {
 			Final = fileLocation + "-Decrypted";
 		}
 		if (!DecryptedFile) {
-			cout << "Could not create the decrypted file. Here is the decrypted text file '" + newMessage + "'. Press ENTER to exit";
+			cout << "Could not create the decrypted file. Here is the decrypted text file '" + newMessage + "'\nPress ENTER to exit";
 			cin.ignore();
 			cin.get();
 			return 0;
@@ -97,7 +97,7 @@ int decrypt() {
 		else {
 			DecryptedFile << newMessage;
 			DecryptedFile.close();
-			cout << "Your Decrypted File is saved to " + Final + ". Press ENTER to exit";
+			cout << "Your Decrypted File is saved to " + Final + "\nPress ENTER to exit";
 			cin.ignore();
 			cin.get();
 			return 0;
@@ -140,7 +140,7 @@ int decrypt() {
 				newMessage += newCharacter;
 			}
 		}
-		cout << "Your decrypted message is '" + newMessage + "'. Press ENTER to exit" << endl;
+		cout << "Your decrypted message is '" + newMessage + "'\nPress ENTER to exit" << endl;
 		cin.ignore();
 		cin.get();
 		return 0;

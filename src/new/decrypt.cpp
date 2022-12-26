@@ -23,8 +23,9 @@ int Newdecrypt() {
 		fstream keyOpen;
 		keyOpen.open(key, ios::in);
 		if (!keyOpen) {
+			keyOpen.open(key + ".txt", ios::in);
 			while (!keyOpen) {
-				cout << "Your file '" + key + "' doesn't exist. Please enter an existing filename." << endl;
+				cout << "Your key '" + key + "' doesn't exist. Please enter an existing filename." << endl;
 				cin >> key;
 				keyOpen.open(key, ios::in);
 			}
@@ -107,7 +108,7 @@ int Newdecrypt() {
 			Final = fileLocation + "-Decrypted";
 		}
 		if (!DecryptedFile) {
-			cout << "Could not create the decrypted file. Here is the decrypted text file '" + newMessage + "'. Press ENTER to exit";
+			cout << "Could not create the decrypted file. Here is the decrypted text file '" + newMessage + "'\nPress ENTER to exit";
 			cin.ignore();
 			cin.get();
 			return 0;
@@ -115,7 +116,7 @@ int Newdecrypt() {
 		else {
 			DecryptedFile << newMessage;
 			DecryptedFile.close();
-			cout << "Your Decrypted File is saved to " + Final + ". Press ENTER to exit";
+			cout << "Your Decrypted File is saved to " + Final + "\nPress ENTER to exit";
 			cin.ignore();
 			cin.get();
 			return 0;
@@ -130,8 +131,9 @@ int Newdecrypt() {
 		fstream keyOpen;
 		keyOpen.open(key, ios::in);
 		if (!keyOpen) {
+			keyOpen.open(key + ".txt", ios::in);
 			while (!keyOpen) {
-				cout << "Your file '" + key + "' doesn't exist. Please enter an existing filename." << endl;
+				cout << "Your key '" + key + "' doesn't exist. Please enter an existing filename." << endl;
 				cin >> key;
 				keyOpen.open(key, ios::in);
 			}
@@ -176,7 +178,7 @@ int Newdecrypt() {
 				newMessage += newCharacter;
 			}
 		}
-		cout << "Your decrypted message is '" + newMessage + "'. Press ENTER to exit" << endl;
+		cout << "Your decrypted message is '" + newMessage + "'\nPress ENTER to exit" << endl;
 		cin.ignore();
 		cin.get();
 		return 0;
