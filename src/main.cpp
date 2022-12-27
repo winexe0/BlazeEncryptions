@@ -1,9 +1,9 @@
 // main.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
-#define VERSION "BlazeEncryptions v2.0.5"
+#define VERSION "BlazeEncryptions v2.0.6"
 #define USAGE "\
-Usage: BlazeEncryptions [--old] [--new] [--encrypt] [--decrypt] [--keygen] [-h] [--help] [--version]\n\
-Options: --old (Uses the older Encryption/Decryption method for compatibility with BlazeEncryptions v1.x and less secure) --new (Uses the Newer Encryption/Decryption method which is more secure but not compatible with v1.x) --encrypt (Encrypt a message) --decrypt (Decrypt a message) --help or -h (Prints this exact messaage) --version (Prints out the version of this Scalc binary)"
+Usage: BlazeEncryptions [--old] [--new] [--encrypt] [--decrypt] [--keygen] [--keystats] [-h] [--help] [--version]\n\
+Options: --old (Uses the older Encryption/Decryption method for compatibility with BlazeEncryptions v1.x and less secure)\n --new (Uses the Newer Encryption/Decryption method which is more secure but not compatible with v1.x)\n --keygen (Generate Encryption keys)\n --keystats (Shows statistics of an existing key)\n --encrypt (Encrypt a message)\n --decrypt (Decrypt a message)\n --help or -h (Prints this exact messaage)\n --version (Prints out the version of this version of BlazeEncryptions)\n"
 #define COPYRIGHT "Copyright (c) 2022 winexe0 <aryan.chandna@icloud.com> Albert Nguyen <azero2113@gmail.com>"
 #include <iostream>
 #include <string>
@@ -16,6 +16,7 @@ Options: --old (Uses the older Encryption/Decryption method for compatibility wi
 #include "new/encrypt.h"
 #include "new/decrypt.h"
 #include "new/keygen.h"
+#include "new/keyinfo.h"
 #include "old/old.h"
 #include "old/decrypt.h"
 #include "old/encrypt.h"
@@ -68,6 +69,9 @@ int main(int argc, char** argv) {
 		}
 		if (arg == "--keygen") {
 			keygen();
+		}
+		if (arg == "--keystats") {
+			keyinfo();
 		}
 		else {
 			cout << VERSION << endl;
