@@ -59,11 +59,11 @@ int main(int argc, char** argv) {
 			cout << "Are you decrypting for:\n1. The Newer Encryption Method \n2. The Older Encryption Method\nPlease type 1 or 2 and press enter." << endl;
 			cin >> cryptMethod;
 			if (stoi(cryptMethod) == 1) {
-				Newencrypt();
+				Newdecrypt();
 				return 0;
 			}
 			if (stoi(cryptMethod) == 2) {
-				encrypt();
+				decrypt();
 				return 0;
 			}
 		}
