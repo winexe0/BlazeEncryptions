@@ -28,7 +28,7 @@ int New() {
 		return 0;
 	}
 	if (crypt == 4) {
-		keyinfo();
+		keyinfo("NULL");
 		return 0;
 	}
 	if (crypt == 5) {

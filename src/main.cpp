@@ -69,9 +69,15 @@ int main(int argc, char** argv) {
 		}
 		if (arg == "--keygen") {
 			keygen();
+			return 0;
+		}
+		if (arg == "--keystats" && argc == 3) {
+			keyinfo(argv[2]);
+			return 0;
 		}
 		if (arg == "--keystats") {
-			keyinfo();
+			keyinfo("NULL");
+			return 0;
 		}
 		else {
 			cout << VERSION << endl;

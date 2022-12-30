@@ -1,2 +1,2 @@
 #pragma once
-int keyinfo();
+int keyinfo(std::string keyName);
