@@ -1,3 +1,3 @@
 #pragma once
 #include <string>
-int keygen();
+int keygen(std::string keyName, unsigned int keyNum, unsigned long long length);
