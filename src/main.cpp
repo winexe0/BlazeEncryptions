@@ -87,7 +87,7 @@ int main(int argc, char** argv) {
 		}
 	}
 	cout << VERSION << endl;
-	cout << "Which Encryption Method would you like to use:\n1. Newer Encryption Method (More Secure, but not compatible with BlazeEncryptions v1.x)\n2. Older Encryption Method (Less Secure, but compatible with BlazeEncryptions v1.x)\nPlease type 1 or 2 and press enter." << endl;
+	cout << "Which Encryption Method would you like to use:\n1. Newer Encryption Method (More Secure, but not compatible with BlazeEncryptions v1.x)\n2. Older Encryption Method (Less Secure, but compatible with BlazeEncryptions v1.x)\n3. Quit the Program\nPlease type 1, 2, or 3 and press enter." << endl;
 	cin >> cryptMethod;
 	if (cryptMethod == "1") {
 		New();
@@ -96,6 +96,9 @@ int main(int argc, char** argv) {
 	if (cryptMethod == "2") {
 		old();
 		return 0;
+	}
+	if (cryptMethod == "3") {
+		return 2;
 	}
 	else {
 		cout << "Unrecognized Option: '" + cryptMethod + "'. \n";
