@@ -25,9 +25,12 @@ int Newdecrypt() {
 		if (!keyOpen) {
 			keyOpen.open(key + ".txt", ios::in);
 			while (!keyOpen) {
-				cout << "Your key '" + key + "' doesn't exist. Please enter an existing filename." << endl;
-				cin >> key;
-				keyOpen.open(key, ios::in);
+				keyOpen.open(key + "0.txt", ios::in);
+				while (!keyOpen) {
+					cout << "Your key '" + key + "' doesn't exist. Please enter an existing filename." << endl;
+					cin >> key;
+					keyOpen.open(key, ios::in);
+				}
 			}
 		}
 		string Keyline, keyContents;
@@ -133,9 +136,12 @@ int Newdecrypt() {
 		if (!keyOpen) {
 			keyOpen.open(key + ".txt", ios::in);
 			while (!keyOpen) {
-				cout << "Your key '" + key + "' doesn't exist. Please enter an existing filename." << endl;
-				cin >> key;
-				keyOpen.open(key, ios::in);
+				keyOpen.open(key + "0.txt", ios::in);
+				while (!keyOpen) {
+					cout << "Your key '" + key + "' doesn't exist. Please enter an existing filename." << endl;
+					cin >> key;
+					keyOpen.open(key, ios::in);
+				}
 			}
 		}
 		string line, keyContents;
