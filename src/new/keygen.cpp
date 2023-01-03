@@ -26,7 +26,12 @@ int keygen() {
 	srand(time(0));
 	fstream key;
 	for (int i = 0; i < keyNum; i++) {
-		key.open(keyName + to_string(i) + ".txt", ios::out);
+		if (keyNum == 1) {
+			key.open(keyName + ".txt", ios::out);
+		}
+		else {
+			key.open(keyName + to_string(i) + ".txt", ios::out);
+		}
 		string tempRandTotal;
 		for (int i = 0; i < length; i++) {
 			if (i == 0) {
