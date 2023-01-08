@@ -1,2 +1,4 @@
 #pragma once
-int old();
+namespace old {
+	int old();
+}

@@ -36,22 +36,22 @@ int main(int argc, char** argv) {
 			exit(0);
 		}
 		if (arg == "--old") {
-			old();
+			old::old();
 			return 0;
 		}
 		if (arg == "--new") {
-			New();
+			New::New();
 			return 0;
 		}
 		if (arg == "--encrypt") {
 			cout << "Which Encryption Method would you like to use:\n1. Newer Encryption Method (More Secure, but not compatible with BlazeEncryptions v1.x)\n2. Older Encryption Method (Less Secure, but compatible with BlazeEncryptions v1.x)\nPlease type 1 or 2 and press enter." << endl;
 			cin >> cryptMethod;
 			if (stoi(cryptMethod) == 1) {
-				Newencrypt();
+				New::encrypt();
 				return 0;
 			}
 			if (stoi(cryptMethod) == 2) {
-				encrypt();
+				old::encrypt();
 				return 0;
 			}
 		}
@@ -59,11 +59,11 @@ int main(int argc, char** argv) {
 			cout << "Are you decrypting for:\n1. The Newer Encryption Method \n2. The Older Encryption Method\nPlease type 1 or 2 and press enter." << endl;
 			cin >> cryptMethod;
 			if (stoi(cryptMethod) == 1) {
-				Newdecrypt();
+				New::decrypt();
 				return 0;
 			}
 			if (stoi(cryptMethod) == 2) {
-				decrypt();
+				old::decrypt();
 				return 0;
 			}
 		}
@@ -90,11 +90,11 @@ int main(int argc, char** argv) {
 	cout << "Which Encryption Method would you like to use:\n1. Newer Encryption Method (More Secure, but not compatible with BlazeEncryptions v1.x)\n2. Older Encryption Method (Less Secure, but compatible with BlazeEncryptions v1.x)\n3. Quit the Program\nPlease type 1, 2, or 3 and press enter." << endl;
 	cin >> cryptMethod;
 	if (cryptMethod == "1") {
-		New();
+		New::New();
 		return 0;
 	}
 	if (cryptMethod == "2") {
-		old();
+		old::old();
 		return 0;
 	}
 	if (cryptMethod == "3") {

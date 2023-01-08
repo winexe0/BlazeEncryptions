@@ -1,2 +1,4 @@
 #pragma once
-int New();
+namespace New {
+	int New();
+}

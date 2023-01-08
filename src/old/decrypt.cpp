@@ -7,7 +7,7 @@
 #include "../split.h"
 #include "decrypt.h"
 using namespace std;
-int decrypt() {
+int old::decrypt() {
 	string alphabet = "abcdefghijklmnopqrstuvwxyz";
 	string ualphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	string newMessage, message;

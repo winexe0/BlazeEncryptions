@@ -7,7 +7,7 @@
 #include "../split.h"
 #include "decrypt.h"
 using namespace std;
-int Newdecrypt() {
+int New::decrypt() {
 	string alphabet = "abcdefghijklmnopqrstuvwxyz";
 	string ualphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	string newMessage, message, key;
@@ -191,7 +191,7 @@ int Newdecrypt() {
 	}
 	else {
 		cout << "Unrecognized Option: '" + to_string(type) + "'. ";
-		Newdecrypt();
+		New::decrypt();
 	}
 	return 0;
 }

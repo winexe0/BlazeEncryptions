@@ -6,7 +6,7 @@
 #include <sstream>
 #include "../split.h"
 #include "encrypt.h"
-int Newencrypt() {
+int New::encrypt() {
 	string alphabet = "abcdefghijklmnopqrstuvwxyz";
 	string ualphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	string newMessage, message, key;
@@ -191,7 +191,7 @@ int Newencrypt() {
 	}
 	else {
 		cout << "Unrecognized Option: '" + to_string(type) + "'. ";
-		Newencrypt();
+		New::encrypt();
 	}
 	return 0;
 }

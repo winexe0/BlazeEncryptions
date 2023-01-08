@@ -1,2 +1,4 @@
 #pragma once
-int Newencrypt();
+namespace New {
+	int encrypt();
+}

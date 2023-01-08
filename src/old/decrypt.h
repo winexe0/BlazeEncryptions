@@ -1,2 +1,4 @@
 #pragma once
-int decrypt();
+namespace old {
+	int decrypt();
+}

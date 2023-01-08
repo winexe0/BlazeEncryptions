@@ -11,7 +11,7 @@
 #include "keyinfo.h"
 #include "new.h"
 using namespace std;
-int New() {
+int New::New() {
 	int crypt;
 	cout << "What would you like to do\n1. Generate Encryption/Decryption Keys\n2. Encrypt\n3. Decrypt\n4. Analyze an existing key\n5. Quit The Program\nPlease type 1, 2, 3, or 4 and press enter." << endl;
 	cin >> crypt;
@@ -20,11 +20,11 @@ int New() {
 		return 0;
 	}
 	if (crypt == 2) {
-		Newencrypt();
+		New::encrypt();
 		return 0;
 	}
 	if (crypt == 3) {
-		Newdecrypt();
+		New::decrypt();
 		return 0;
 	}
 	if (crypt == 4) {

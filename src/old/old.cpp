@@ -9,7 +9,7 @@
 #include "decrypt.h"
 #include "old.h"
 using namespace std;
-int old() {
+int old::old() {
 	int crypt;
 	cout << "What would you like to do\n1. Encrypt\n2. Decrypt\n3. Quit The Program\nPlease type 1, 2, or 3 and press enter." << endl;
 	cin >> crypt;
