@@ -18,7 +18,8 @@ int New::encrypt() {
 		cout << "What is the name or path of the text file" << endl;
 		cin >> fileLocation;
 		cout << "Please enter the encryption key filename to encrypt the text file?" << endl;
-		cin >> key;
+		cin.ignore();
+		getline(cin, key);
 		fstream keyOpen;
 		keyOpen.open(key, ios::in);
 		if (!keyOpen) {
@@ -27,7 +28,7 @@ int New::encrypt() {
 				keyOpen.open(key + "0.txt", ios::in);
 				while (!keyOpen) {
 					cout << "Your key '" + key + "' doesn't exist. Please enter an existing filename." << endl;
-					cin >> key;
+					getline(cin, key);
 					keyOpen.open(key, ios::in);
 				}
 			}
@@ -129,7 +130,7 @@ int New::encrypt() {
 		cin.ignore();
 		getline(cin, message);
 		cout << "Please enter the encryption key filename to encrypt the message?" << endl;
-		cin >> key;
+		getline(cin, key);
 		fstream keyOpen;
 		keyOpen.open(key, ios::in);
 		if (!keyOpen) {
@@ -138,7 +139,7 @@ int New::encrypt() {
 				keyOpen.open(key + "0.txt", ios::in);
 				while (!keyOpen) {
 					cout << "Your key '" + key + "' doesn't exist. Please enter an existing filename." << endl;
-					cin >> key;
+					getline(cin, key);
 					keyOpen.open(key, ios::in);
 				}
 

@@ -7,7 +7,8 @@ using namespace std;
 int keyinfo(std::string keyName) {
 	if (keyName == "NULL") {
 		cout << "What is the name of the key you want to analyze?" << endl;
-		cin >> keyName;
+		cin.ignore();
+		getline(cin, keyName);
 		fstream keyExist;
 		keyExist.open(keyName, ios::in);
 		if (!keyExist) {

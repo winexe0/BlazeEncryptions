@@ -19,7 +19,8 @@ int New::decrypt() {
 		cout << "What is the name or path of the text file" << endl;
 		cin >> fileLocation;
 		cout << "Please enter the decryption key filename to decrypt the text file?" << endl;
-		cin >> key;
+		cin.ignore();
+		getline(cin, key);
 		fstream keyOpen;
 		keyOpen.open(key, ios::in);
 		if (!keyOpen) {
@@ -130,7 +131,7 @@ int New::decrypt() {
 		cin.ignore();
 		getline(cin, message);
 		cout << "Please enter the decryption key filename to decrypt the message?" << endl;
-		cin >> key;
+		getline(cin, key);
 		fstream keyOpen;
 		keyOpen.open(key, ios::in);
 		if (!keyOpen) {
