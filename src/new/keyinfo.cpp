@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
-#include <filesystem>
 #include <fstream>
+#include "fileSize.h"
 #include "keyinfo.h"
 using namespace std;
 int keyinfo(std::string keyName) {
@@ -19,10 +19,9 @@ int keyinfo(std::string keyName) {
 				cin >> keyName;
 				keyExist.open(keyName, ios::in);
 			}
-		}
-		filesystem::path size{ keyName };
+		};
 		cout << "Statistics for key: " + keyName + "\n";
-		cout << "With this key it is possible to encrypt messages up to " << filesystem::file_size(size) << " characters long." << endl;
+		cout << "With this key it is possible to encrypt messages up to " << fileSize(keyName) << " characters long." << endl;
 		cout << "Press ENTER to exit" << endl;
 		cin.get();
 		cin.ignore();
@@ -39,9 +38,8 @@ int keyinfo(std::string keyName) {
 				return 1;
 			}
 		}
-		filesystem::path size{ keyName };
 		cout << "Statistics for key: " + keyName + "\n";
-		cout << "With this key it is possible to encrypt messages up to " << filesystem::file_size(size) << " characters long." << endl;
+		cout << "With this key it is possible to encrypt messages up to " << fileSize(keyName) << " characters long." << endl;
 		cout << "Press ENTER to exit" << endl;
 		cin.get();
 		cin.ignore();

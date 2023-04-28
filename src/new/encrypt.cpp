@@ -4,8 +4,10 @@
 #include <fstream>
 #include <iterator>
 #include <sstream>
+#include <filesystem>
 #include "../split.h"
 #include "encrypt.h"
+#include "fileSize.h"
 int New::encrypt() {
 	string alphabet = "abcdefghijklmnopqrstuvwxyz";
 	string ualphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -34,11 +36,41 @@ int New::encrypt() {
 			}
 		}
 		string Keyline, keyContents;
-		while (getline(keyOpen, Keyline)) {
-			vector<string> row_values;
-			split(Keyline, '\t', row_values);
-			for (auto v : row_values)
-				keyContents += v;
+		bool bypass = false;
+		//filesystem::path keylength(key);
+		while (fileLocation.size() > fileSize(key) || fileLocation.size() > fileSize(key + ".txt") || fileLocation.size() > fileSize(key + "0.txt")) {
+			cout << "The key '" + key + "' is not long enough to encrypt your file '" + fileLocation + "'. Please specify a key of at least " + to_string(message.size()) + " in length." << endl;
+			getline(cin, key);
+			//filesystem::path keylength(key);
+			keyOpen.close();
+			keyOpen.open(key, ios::in);
+			while (getline(keyOpen, Keyline)) {
+				vector<string> row_values;
+				split(Keyline, '\t', row_values);
+				for (auto v : row_values)
+					keyContents += v;
+			}
+			while (keyContents == "") {
+				keyOpen.close();
+				keyOpen.open(key + ".txt", ios::in);
+				while (getline(keyOpen, Keyline)) {
+					vector<string> row_values;
+					split(Keyline, '\t', row_values);
+					for (auto v : row_values)
+						keyContents += v;
+				}
+			}
+			bypass = true;
+		}
+		if (bypass == false) {
+			keyOpen.close();
+			keyOpen.open(key, ios::in);
+			while (getline(keyOpen, Keyline)) {
+				vector<string> row_values;
+				split(Keyline, '\t', row_values);
+				for (auto v : row_values)
+					keyContents += v;
+			}
 		}
 		fstream FileToEncrypt;
 		FileToEncrypt.open(fileLocation, ios::in);
@@ -146,11 +178,41 @@ int New::encrypt() {
 			}
 		}
 		string line, keyContents;
-		while (getline(keyOpen, line)) {
-			vector<string> row_values;
-			split(line, '\t', row_values);
-			for (auto v : row_values)
-				keyContents += v;
+		bool bypass = false;
+		//filesystem::path keylength(key);
+		while (message.size() > fileSize(key) || message.size() > fileSize(key + ".txt") || message.size() > fileSize(key + "0.txt")) {
+			cout << "The key '" + key + "' is not long enough to encrypt your message '" + message + "'. Please specify a key of at least " + to_string(message.size()) + " in length." << endl;
+			getline(cin, key);
+			//filesystem::path keylength(key);
+			keyOpen.close();
+			keyOpen.open(key, ios::in);
+			while (getline(keyOpen, line)) {
+				vector<string> row_values;
+				split(line, '\t', row_values);
+				for (auto v : row_values)
+					keyContents += v;
+			}
+			while (keyContents == "") {
+				keyOpen.close();
+				keyOpen.open(key + ".txt", ios::in);
+				while (getline(keyOpen, line)) {
+					vector<string> row_values;
+					split(line, '\t', row_values);
+					for (auto v : row_values)
+						keyContents += v;
+				}
+			}
+			bypass = true;
+		}
+		if (bypass == false) {
+			keyOpen.close();
+			keyOpen.open(key, ios::in);
+			while (getline(keyOpen, line)) {
+				vector<string> row_values;
+				split(line, '\t', row_values);
+				for (auto v : row_values)
+					keyContents += v;
+			}
 		}
 		for (int i = 0; i < message.size(); i++) {
 			string keyContentsInt;
