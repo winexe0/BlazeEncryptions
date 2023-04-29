@@ -213,6 +213,16 @@ int New::encrypt() {
 				for (auto v : row_values)
 					keyContents += v;
 			}
+			while (keyContents == "") {
+				keyOpen.close();
+				keyOpen.open(key + ".txt", ios::in);
+				while (getline(keyOpen, line)) {
+					vector<string> row_values;
+					split(line, '\t', row_values);
+					for (auto v : row_values)
+						keyContents += v;
+				}
+			}
 		}
 		for (int i = 0; i < message.size(); i++) {
 			string keyContentsInt;
