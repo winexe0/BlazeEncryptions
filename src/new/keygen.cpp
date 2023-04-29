@@ -1,3 +1,11 @@
+#ifdef _WIN32
+#define OS BCryptGenRandom(BCRYPT_RNG_ALG_HANDLE, &tempRand, 1, NULL);
+#include <Windows.h>
+#endif // _WIN32
+#ifdef __linux__
+#define OS getrandom(&tempRand, 1, NULL);
+#include <sys/random.h>
+#endif // __linux__
 #define SUCCESSGEN " have been successfully generated with capability to encrypt messages up to "
 #define CHARLONG " characters long with the name of the "
 #define SAMEDIREXIT " This can be found at the same directory that BlazeEncryptions was run. Press ENTER to exit."
@@ -36,12 +44,18 @@ int keygen() {
 		string tempRandTotal;
 		for (int i = 0; i < length; i++) {
 			if (i == 0) {
-				int tempRand = rand() % 10;
-				tempRandTotal = to_string(tempRand);
+				long status;
+				unsigned char tempRand;
+				status = OS;
+				int tempRandInt = (int)tempRand % 10;
+				tempRandTotal = to_string(tempRandInt);
 			}
 			if (i != 0) {
-				int tempRand = rand() % 10;
-				tempRandTotal += to_string(tempRand);
+				long status;
+				unsigned char tempRand;
+				status = OS;
+				int tempRandInt = (int)tempRand % 10;
+				tempRandTotal += to_string(tempRandInt);
 			}
 		}
 		key << tempRandTotal;
