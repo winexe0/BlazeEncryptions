@@ -9,7 +9,7 @@ A Program which encrypts or decrypts text files or messages.
 * cmake
 # Windows
 # Requirements
-* C++ Compiler (C++17 Compliant)
+* C++ Compiler (C++11 Compliant)
 * [cmake](https://cmake.org/download/) 
 
 installed in your Path Environment Variable. 
