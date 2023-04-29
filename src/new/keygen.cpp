@@ -1,5 +1,5 @@
 #ifdef _WIN32
-#define OS BCryptGenRandom(BCRYPT_RNG_ALG_HANDLE, &tempRand, 1, NULL);
+#define OS BCryptGenRandom(NULL, &tempRand, 1, BCRYPT_USE_SYSTEM_PREFERRED_RNG);
 #include <Windows.h>
 #endif // _WIN32
 #ifdef __linux__
