@@ -36,7 +36,6 @@ int keygen() {
 	}
 	cin.ignore();
 	getline(cin, keyName);
-	srand(time(0));
 	fstream key;
 	for (int i = 0; i < keyNum; i++) {
 		if (keyNum == 1) {
