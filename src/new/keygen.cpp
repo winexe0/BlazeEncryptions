@@ -6,6 +6,10 @@
 #define OS getrandom(&tempRand, 1, NULL);
 #include <sys/random.h>
 #endif // __linux__
+#ifdef __APPLE__
+#define OS getentropy(&tempRand, 1);
+#include <sys/random.h>
+#endif // __APPLE__
 #define SUCCESSGEN " have been successfully generated with capability to encrypt messages up to "
 #define CHARLONG " characters long with the name of the "
 #define SAMEDIREXIT " This can be found at the same directory that BlazeEncryptions was run. Press ENTER to exit."
