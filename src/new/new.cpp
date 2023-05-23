@@ -4,6 +4,7 @@
 #include <fstream>
 #include <iterator>
 #include <sstream>
+#include "../main.h"
 #include "../split.h"
 #include "encrypt.h"
 #include "decrypt.h"
@@ -13,26 +14,23 @@
 using namespace std;
 int New::New() {
 	int crypt;
-	cout << "What would you like to do\n1. Generate Encryption/Decryption Keys\n2. Encrypt\n3. Decrypt\n4. Analyze an existing key\n5. Quit The Program\nPlease type 1, 2, 3, or 4 and press enter." << endl;
+	cout << "What would you like to do\n1. Generate Encryption/Decryption Keys\n2. Encrypt\n3. Decrypt\n4. Analyze an existing key\nPlease type 1, 2, 3, or 4 and press enter." << endl;
 	cin >> crypt;
 	if (crypt == 1) {
 		keygen();
-		return 0;
+		main(NULL, NULL);
 	}
 	if (crypt == 2) {
 		New::encrypt();
-		return 0;
+		main(NULL, NULL);
 	}
 	if (crypt == 3) {
 		New::decrypt();
-		return 0;
+		main(NULL, NULL);
 	}
 	if (crypt == 4) {
 		keyinfo("NULL");
-		return 0;
-	}
-	if (crypt == 5) {
-		return 0;
+		main(NULL, NULL);
 	}
 	else {
 		cout << "Unrecognized Option: '" + to_string(crypt) + "'. \n";

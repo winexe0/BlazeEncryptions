@@ -18,6 +18,7 @@
 #include <fstream>
 #include <cstdlib>
 #include <time.h>
+#include "../main.h"
 #include "keygen.h"
 using namespace std;
 int keygen() {
@@ -81,5 +82,5 @@ int keygen() {
 	}
 	cin.get();
 	cin.ignore();
-	return 0;
+	main(NULL, NULL);
 }

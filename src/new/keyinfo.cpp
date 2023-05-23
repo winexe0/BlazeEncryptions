@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include "../main.h"
 #include "fileSize.h"
 #include "keyinfo.h"
 using namespace std;
@@ -25,7 +26,7 @@ int keyinfo(std::string keyName) {
 		cout << "Press ENTER to exit" << endl;
 		cin.get();
 		cin.ignore();
-		return 0;
+		main(NULL, NULL);
 	}
 	else {
 		fstream keyExist;

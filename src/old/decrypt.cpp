@@ -4,6 +4,7 @@
 #include <fstream>
 #include <iterator>
 #include <sstream>
+#include "../main.h"
 #include "../split.h"
 #include "decrypt.h"
 using namespace std;
@@ -92,7 +93,7 @@ int old::decrypt() {
 			cout << "Could not create the decrypted file. Here is the decrypted text file '" + newMessage + "'\nPress ENTER to exit";
 			cin.ignore();
 			cin.get();
-			return 0;
+			main(NULL, NULL);
 		}
 		else {
 			DecryptedFile << newMessage;
@@ -100,7 +101,7 @@ int old::decrypt() {
 			cout << "Your Decrypted File is saved to " + Final + "\nPress ENTER to exit";
 			cin.ignore();
 			cin.get();
-			return 0;
+			main(NULL, NULL);
 		}
 	}
 	if (type == 2) {
@@ -143,11 +144,11 @@ int old::decrypt() {
 		cout << "Your decrypted message is '" + newMessage + "'\nPress ENTER to exit" << endl;
 		cin.ignore();
 		cin.get();
-		return 0;
+		main(NULL, NULL);
 	}
 	else {
 		cout << "Unrecognized Option: '" + to_string(type) + "'. ";
 		decrypt();
 	}
-	return 0;
+	main(NULL, NULL);
 }
