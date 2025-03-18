@@ -86,7 +86,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: BlazeEncryptionsx86_64.exe
-        path: ${{github.workspace}}/buildx86/Release/BlazeEncryptions.exe
+        path: ${{github.workspace}}/build/Release/BlazeEncryptions.exe
 
     - name: Attach ARM64 Binary
       uses: actions/upload-artifact@v4
