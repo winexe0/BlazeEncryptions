@@ -11,7 +11,7 @@ env:
   BUILD_TYPE: Release
 
 jobs:
-  build:
+  linux_build:
     # The CMake configure and build commands are platform agnostic and should work equally well on Windows or Mac.
     # You can convert this to a matrix build if you need cross-platform coverage.
     # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
@@ -42,13 +42,71 @@ jobs:
       run: cd ${{github.workspace}}/build && tar -cvPzf BlazeEncryptionsx86_64.tar.gz BlazeEncryptions && cd ../buildarm64 && tar -cvPzf BlazeEncryptionsaarch64.tar.gz BlazeEncryptions
 
     - name: Attach x86_64 Binary
-      uses: actions/upload-artifact@v3.1.1
+      uses: actions/upload-artifact@v4
       with :
         name: BlazeEncryptions-x86_64
         path: ${{github.workspace}}/build/BlazeEncryptionsx86_64.tar.gz
         
     - name: Attach ARM64 Binary
-      uses: actions/upload-artifact@v3.1.1
+      uses: actions/upload-artifact@v4
       with :
         name: BlazeEncryptions-ARM64
         path: ${{github.workspace}}/buildarm64/BlazeEncryptionsaarch64.tar.gz
+  windows_build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up MSVC environment
+      shell: cmd
+      run: |
+        call "C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\VC\Auxiliary\Build\vcvars64.bat"
+
+    - name: Configure CMake
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -G "Visual Studio 16 2019" -A x64
+
+    - name: Build
+      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+
+    - name: Configure CMake (ARM64)
+      run: cmake -B ${{github.workspace}}/buildarm64 -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -G "Visual Studio 16 2019" -A ARM64
+
+    - name: Build (ARM64)
+      run: cmake --build ${{github.workspace}}/buildarm64 --config ${{env.BUILD_TYPE}}
+
+    - name: Configure CMake (ARMv7)
+      run: cmake -B ${{github.workspace}}/buildarmv7 -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -G "Visual Studio 16 2019" -A ARM
+
+    - name: Build (ARMv7)
+      run: cmake --build ${{github.workspace}}/buildarmv7 --config ${{env.BUILD_TYPE}}
+
+    - name: Configure CMake (x86)
+      run: cmake -B ${{github.workspace}}/buildx86 -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -G "Visual Studio 16 2019" -A Win32
+
+    - name: Build (x86)
+      run: cmake --build ${{github.workspace}}/buildx86 --config ${{env.BUILD_TYPE}}
+      
+    - name: Attach x86_64 Binary
+      uses: actions/upload-artifact@v4
+      with:
+        name: BlazeEncryptionsx86_64.exe
+        path: ${{github.workspace}}/build/BlazeEncryptionsx86_64.exe
+
+    - name: Attach ARM64 Binary
+      uses: actions/upload-artifact@v4
+      with:
+        name: BlazeEncryptionsaarch64.exe
+        path: ${{github.workspace}}/buildarm64/BlazeEncryptionsaarch64.exe
+      
+    - name: Attach ARMv7 Binary
+      uses: actions/upload-artifact@v4
+      with:
+        name: BlazeEncryptionsarmv7.exe
+        path: ${{github.workspace}}/buildarmv7/BlazeEncryptionsarmv7.exe
+
+    - name: Attach x86 Binary
+      uses: actions/upload-artifact@v4
+      with:
+        name: BlazeEncryptionsx86_32.exe
+        path: ${{github.workspace}}/buildx86/BlazeEncryptionsx86.exe
