@@ -53,31 +53,31 @@ jobs:
         name: BlazeEncryptions-ARM64
         path: ${{github.workspace}}/buildarm64/BlazeEncryptionsaarch64.tar.gz
   windows_build:
-    runs-on: windows-latest
+    runs-on: windows-2019
 
     steps:
     - uses: actions/checkout@v3
 
     - name: Configure CMake
-      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -G "Visual Studio 17 2022" -A x64
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -G "Visual Studio 16 2019" -A x64
 
     - name: Build
       run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
 
     - name: Configure CMake (ARM64)
-      run: cmake -B ${{github.workspace}}/buildarm64 -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -G "Visual Studio 17 2022" -A ARM64
+      run: cmake -B ${{github.workspace}}/buildarm64 -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -G "Visual Studio 16 2019" -A ARM64
 
     - name: Build (ARM64)
       run: cmake --build ${{github.workspace}}/buildarm64 --config ${{env.BUILD_TYPE}}
 
     - name: Configure CMake (ARMv7)
-      run: cmake -B ${{github.workspace}}/buildarmv7 -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -G "Visual Studio 17 2022" -A ARM
+      run: cmake -B ${{github.workspace}}/buildarmv7 -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -G "Visual Studio 16 2019" -A ARM
 
     - name: Build (ARMv7)
       run: cmake --build ${{github.workspace}}/buildarmv7 --config ${{env.BUILD_TYPE}}
 
     - name: Configure CMake (x86)
-      run: cmake -B ${{github.workspace}}/buildx86 -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -G "Visual Studio 17 2022" -A Win32
+      run: cmake -B ${{github.workspace}}/buildx86 -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -G "Visual Studio 16 2019" -A Win32
 
     - name: Build (x86)
       run: cmake --build ${{github.workspace}}/buildx86 --config ${{env.BUILD_TYPE}}
@@ -104,4 +104,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: BlazeEncryptionsx86_32.exe
-        path: ${{github.workspace}}/buildx86/BlazeEncryptionsx86.exe
+        path: ${{github.workspace}}/buildx86/BlazeEncryptionsx86_32.exe
