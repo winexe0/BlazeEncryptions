@@ -65,19 +65,19 @@ jobs:
       run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
 
     - name: Configure CMake (ARM64)
-      run: cmake -B ${{github.workspace}}/buildarm64 -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -G "Visual Studio 16 2019" -A ARM64
+      run: cmake -B ${{github.workspace}}/buildarm64 -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -G "Visual Studio 16 2019" -A ARM64 -DCMAKE_MSVC_RUNTIME_LIBRARY=MultiThreaded
 
     - name: Build (ARM64)
       run: cmake --build ${{github.workspace}}/buildarm64 --config ${{env.BUILD_TYPE}}
 
     - name: Configure CMake (ARMv7)
-      run: cmake -B ${{github.workspace}}/buildarmv7 -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -G "Visual Studio 16 2019" -A ARM
+      run: cmake -B ${{github.workspace}}/buildarmv7 -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -G "Visual Studio 16 2019" -A ARM -DCMAKE_MSVC_RUNTIME_LIBRARY=MultiThreaded
 
     - name: Build (ARMv7)
       run: cmake --build ${{github.workspace}}/buildarmv7 --config ${{env.BUILD_TYPE}}
 
     - name: Configure CMake (x86)
-      run: cmake -B ${{github.workspace}}/buildx86 -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -G "Visual Studio 16 2019" -A Win32
+      run: cmake -B ${{github.workspace}}/buildx86 -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -G "Visual Studio 16 2019" -A Win32 -DCMAKE_MSVC_RUNTIME_LIBRARY=MultiThreaded
 
     - name: Build (x86)
       run: cmake --build ${{github.workspace}}/buildx86 --config ${{env.BUILD_TYPE}}
