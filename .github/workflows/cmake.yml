@@ -58,11 +58,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Set up MSVC environment
-      shell: cmd
-      run: |
-        call "C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\VC\Auxiliary\Build\vcvars64.bat"
-
     - name: Configure CMake
       run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -G "Visual Studio 16 2019" -A x64
 
