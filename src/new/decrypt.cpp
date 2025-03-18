@@ -17,7 +17,8 @@ int New::decrypt() {
 	if (type == 1) {
 		string fileLocation;
 		cout << "What is the name or path of the text file" << endl;
-		cin >> fileLocation;
+		cin.ignore();
+		getline(cin, fileLocation);
 		cout << "Please enter the decryption key filename to decrypt the text file?" << endl;
 		cin.ignore();
 		getline(cin, key);
@@ -29,7 +30,8 @@ int New::decrypt() {
 				keyOpen.open(key + "0.txt", ios::in);
 				while (!keyOpen) {
 					cout << "Your key '" + key + "' doesn't exist. Please enter an existing filename." << endl;
-					cin >> key;
+					cin.ignore();
+					getline(cin, key);
 					keyOpen.open(key, ios::in);
 				}
 			}
@@ -46,7 +48,8 @@ int New::decrypt() {
 		if (!FileToDecrypt) {
 			while (!FileToDecrypt) {
 				cout << "Your file '" + fileLocation + "' doesn't exist. Please enter an existing filename." << endl;
-				cin >> fileLocation;
+				cin.ignore();
+				getline(cin, fileLocation);
 				FileToDecrypt.open(fileLocation, ios::in);
 			}
 		}
@@ -140,7 +143,8 @@ int New::decrypt() {
 				keyOpen.open(key + "0.txt", ios::in);
 				while (!keyOpen) {
 					cout << "Your key '" + key + "' doesn't exist. Please enter an existing filename." << endl;
-					cin >> key;
+					cin.ignore();
+					getline(cin, key);
 					keyOpen.open(key, ios::in);
 				}
 			}

@@ -17,7 +17,8 @@ int old::decrypt() {
 	if (type == 1) {
 		string fileLocation;
 		cout << "What is the name or path of the text file" << endl;
-		cin >> fileLocation;
+		cin.ignore();
+		getline(cin, fileLocation);
 		cout << "Please enter the decryption key in number form to decrypt the text file?" << endl;
 		cin >> key;
 		fstream FileToDecrypt;
@@ -25,7 +26,8 @@ int old::decrypt() {
 		if (!FileToDecrypt) {
 			while (!FileToDecrypt) {
 				cout << "Your file '" + fileLocation + "' doesn't exist. Please enter an existing filename." << endl;
-				cin >> fileLocation;
+				cin.ignore();
+				getline(cin, fileLocation);
 				FileToDecrypt.open(fileLocation, ios::in);
 			}
 		}

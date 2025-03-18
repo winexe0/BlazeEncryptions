@@ -16,7 +16,8 @@ int keyinfo(std::string keyName) {
 			keyName = keyName + ".txt";
 			while (!keyExist) {
 				cout << "Your key doesn't exist. Please enter an existing key to analyze" << endl;
-				cin >> keyName;
+				cin.ignore();
+				getline(cin, keyName);;
 				keyExist.open(keyName, ios::in);
 			}
 		};
