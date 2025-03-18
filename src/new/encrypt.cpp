@@ -18,7 +18,8 @@ int New::encrypt() {
 	if (type == 1) {
 		string fileLocation;
 		cout << "What is the name or path of the text file" << endl;
-		cin >> fileLocation;
+		cin.ignore();
+		getline(cin, fileLocation);
 		cout << "Please enter the encryption key filename to encrypt the text file?" << endl;
 		cin.ignore();
 		getline(cin, key);
@@ -77,7 +78,8 @@ int New::encrypt() {
 		if (!FileToEncrypt) {
 			while (!FileToEncrypt) {
 				cout << "Your file '" + fileLocation + "' doesn't exist. Please enter an existing filename." << endl;
-				cin >> fileLocation;
+				cin.ignore();
+				getline(cin, fileLocation);
 				FileToEncrypt.open(fileLocation, ios::in);
 			}
 		}
