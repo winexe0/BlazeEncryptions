@@ -11,13 +11,21 @@ int old::encrypt() {
 	string alphabet = "abcdefghijklmnopqrstuvwxyz";
 	string ualphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	string newMessage, message;
-	int key, type;
-	cout << "Do you want to\n1. Encrypt a text file\n2. Encrypt a message\nPlease type 1 or 2 and press enter." << endl;
-	cin >> type;
-	if (type == 1) {
+	string type;
+	int key;
+	try {
+		cout << "Do you want to\n1. Encrypt a text file\n2. Encrypt a message\nPlease type 1 or 2 and press enter." << endl;
+		getline(cin, type);
+		if (stoi(type) != 1 && stoi(type) != 2) throw 1;
+	}
+	catch (...) {
+		cout << "Unrecognized Option: '" + type + "'. ";
+		encrypt();
+		return 0;
+	}
+	if (stoi(type) == 1) {
 		string fileLocation;
 		cout << "What is the name or path of the text file" << endl;
-		cin.ignore();
 		getline(cin, fileLocation);
 		cout << "Please enter a encryption key in number form to encrypt the text file?" << endl;
 		cin >> key;
@@ -26,7 +34,6 @@ int old::encrypt() {
 		if (!FileToEncrypt) {
 			while (!FileToEncrypt) {
 				cout << "Your file '" + fileLocation + "' doesn't exist. Please enter an existing filename." << endl;
-				cin.ignore();
 				getline(cin, fileLocation);
 				FileToEncrypt.open(fileLocation, ios::in);
 			}
@@ -105,9 +112,8 @@ int old::encrypt() {
 			return 0;
 		}
 	}
-	if (type == 2) {
+	if (stoi(type) == 2) {
 		cout << "Please enter a message to encrypt?" << endl;
-		cin.ignore();
 		getline(cin, message);
 		cout << "Please enter a encryption key in number form to encrypt the message?" << endl;
 		cin >> key;
@@ -146,10 +152,6 @@ int old::encrypt() {
 		cin.ignore();
 		cin.get();
 		return 0;
-	}
-	else {
-		cout << "Unrecognized Option: '" + to_string(type) + "'. ";
-		encrypt();
 	}
 	return 0;
 }

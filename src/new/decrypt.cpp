@@ -11,16 +11,22 @@ int New::decrypt() {
 	string alphabet = "abcdefghijklmnopqrstuvwxyz";
 	string ualphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	string newMessage, message, key;
-	int type;
-	cout << "Do you want to\n1. Decrypt a text file\n2. Decrypt a message\nPlease type 1 or 2 and press enter." << endl;
-	cin >> type;
-	if (type == 1) {
+	string type;
+	try {
+		cout << "Do you want to\n1. Decrypt a text file\n2. Decrypt a message\nPlease type 1 or 2 and press enter." << endl;
+		getline(cin, type);
+		if (stoi(type) != 1 && stoi(type) != 2) throw 1;
+	}
+	catch (...) {
+		cout << "Unrecognized Option: '" + type + "'. ";
+		decrypt();
+		return 0;
+	}
+	if (stoi(type) == 1) {
 		string fileLocation;
 		cout << "What is the name or path of the text file" << endl;
-		cin.ignore();
 		getline(cin, fileLocation);
 		cout << "Please enter the decryption key filename to decrypt the text file?" << endl;
-		cin.ignore();
 		getline(cin, key);
 		fstream keyOpen;
 		keyOpen.open(key, ios::in);
@@ -30,7 +36,6 @@ int New::decrypt() {
 				keyOpen.open(key + "0.txt", ios::in);
 				while (!keyOpen) {
 					cout << "Your key '" + key + "' doesn't exist. Please enter an existing filename." << endl;
-					cin.ignore();
 					getline(cin, key);
 					keyOpen.open(key, ios::in);
 				}
@@ -48,7 +53,6 @@ int New::decrypt() {
 		if (!FileToDecrypt) {
 			while (!FileToDecrypt) {
 				cout << "Your file '" + fileLocation + "' doesn't exist. Please enter an existing filename." << endl;
-				cin.ignore();
 				getline(cin, fileLocation);
 				FileToDecrypt.open(fileLocation, ios::in);
 			}
@@ -129,9 +133,8 @@ int New::decrypt() {
 			return 0;
 		}
 	}
-	if (type == 2) {
+	if (stoi(type) == 2) {
 		cout << "Please enter a message to decrypt?" << endl;
-		cin.ignore();
 		getline(cin, message);
 		cout << "Please enter the decryption key filename to decrypt the message?" << endl;
 		getline(cin, key);
@@ -143,7 +146,6 @@ int New::decrypt() {
 				keyOpen.open(key + "0.txt", ios::in);
 				while (!keyOpen) {
 					cout << "Your key '" + key + "' doesn't exist. Please enter an existing filename." << endl;
-					cin.ignore();
 					getline(cin, key);
 					keyOpen.open(key, ios::in);
 				}
@@ -193,10 +195,6 @@ int New::decrypt() {
 		cin.ignore();
 		cin.get();
 		return 0;
-	}
-	else {
-		cout << "Unrecognized Option: '" + to_string(type) + "'. ";
-		New::decrypt();
 	}
 	return 0;
 }

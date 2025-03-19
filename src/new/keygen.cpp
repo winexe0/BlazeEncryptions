@@ -9,32 +9,44 @@
 #include "keygen.h"
 using namespace std;
 int keygen() {
-	unsigned int keyNum;
-	unsigned long long length;
+	string numbers = "0123456789";
+	string keyNum;
+	string length;
 	string keyName;
 	cout << "How many keys do you want to generate" << endl;
-	cin >> keyNum;
+	getline(cin, keyNum);
+	for (int i = 0; i < keyNum.size(); i++) {
+		if (numbers.find(keyNum[i]) == string::npos) {
+			cout << "Please enter a valid number" << endl;
+			getline(cin, keyNum);
+		}
+	}
 	cout << "What is the maximum length of your messages" << endl;
-	cin >> length;
-	if (keyNum == 1) {
+	getline(cin, length);
+	for (int i = 0; i < length.size(); i++) {
+		if (numbers.find(length[i]) == string::npos) {
+			cout << "Please enter a valid number" << endl;
+			getline(cin, length);
+		}
+	}
+	if (stoul(keyNum) == 1) {
 		cout << "What will be the name of your key" << endl;
 	}
 	else {
 		cout << "What will be the name of your keys" << endl;
 	}
-	cin.ignore();
 	getline(cin, keyName);
 	srand(time(0));
 	fstream key;
-	for (int i = 0; i < keyNum; i++) {
-		if (keyNum == 1) {
+	for (int i = 0; i < stoul(keyNum); i++) {
+		if (stoul(keyNum) == 1) {
 			key.open(keyName + ".txt", ios::out);
 		}
 		else {
 			key.open(keyName + to_string(i) + ".txt", ios::out);
 		}
 		string tempRandTotal;
-		for (int i = 0; i < length; i++) {
+		for (int i = 0; i < stoull(length); i++) {
 			if (i == 0) {
 				int tempRand = rand() % 10;
 				tempRandTotal = to_string(tempRand);
@@ -47,16 +59,16 @@ int keygen() {
 		key << tempRandTotal;
 		key.close();
 	}
-	if (keyNum == 1) {
-		cout << to_string(keyNum) + " key" + SUCCESSGEN + to_string(length) + CHARLONG + "key being " + keyName + ".txt." + SAMEDIREXIT << endl;
+	if (stoull(keyNum) == 1) {
+		cout << keyNum + " key" + SUCCESSGEN + length + CHARLONG + "key being " + keyName + ".txt." + SAMEDIREXIT << endl;
 	}
 	else {
-		cout << to_string(keyNum) + " keys" + SUCCESSGEN + to_string(length) + CHARLONG + "keys being ";
-		for (int i = 0; i < keyNum; i++) {
-			if (keyNum != (i + 1)) {
+		cout << keyNum + " keys" + SUCCESSGEN + length + CHARLONG + "keys being ";
+		for (int i = 0; i < stoul(keyNum); i++) {
+			if (stoul(keyNum) != (i + 1)) {
 				cout << keyName + to_string(i) + ".txt and ";
 			}
-			if (keyNum == (i + 1)) {
+			if (stoul(keyNum) == (i + 1)) {
 				cout << keyName + to_string(i) + ".txt.";
 			}
 		}

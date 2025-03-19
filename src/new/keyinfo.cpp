@@ -7,7 +7,6 @@ using namespace std;
 int keyinfo(std::string keyName) {
 	if (keyName == "NULL") {
 		cout << "What is the name of the key you want to analyze?" << endl;
-		cin.ignore();
 		getline(cin, keyName);
 		fstream keyExist;
 		keyExist.open(keyName, ios::in);
@@ -16,7 +15,6 @@ int keyinfo(std::string keyName) {
 			keyName = keyName + ".txt";
 			while (!keyExist) {
 				cout << "Your key doesn't exist. Please enter an existing key to analyze" << endl;
-				cin.ignore();
 				getline(cin, keyName);;
 				keyExist.open(keyName, ios::in);
 			}
