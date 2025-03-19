@@ -4,7 +4,6 @@
 #include <fstream>
 #include <iterator>
 #include <sstream>
-#include <filesystem>
 #include "../split.h"
 #include "encrypt.h"
 #include "fileSize.h"
@@ -218,11 +217,9 @@ int New::encrypt() {
 		}
 		string line, keyContents;
 		bool bypass = false;
-		//filesystem::path keylength(key);
 		while (message.size() > fileSize(key) || message.size() > fileSize(key + ".txt") || message.size() > fileSize(key + "0.txt")) {
 			cout << "The key '" + key + "' is not long enough to encrypt your message '" + message + "'. Please specify a key of at least " + to_string(message.size()) + " in length." << endl;
 			getline(cin, key);
-			//filesystem::path keylength(key);
 			keyOpen.close();
 			keyOpen.open(key, ios::in);
 			while (!keyOpen) {
