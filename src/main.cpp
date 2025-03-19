@@ -44,8 +44,15 @@ int main(int argc, char** argv) {
 			return 0;
 		}
 		if (arg == "--encrypt") {
-			cout << "Which Encryption Method would you like to use:\n1. Newer Encryption Method (More Secure, but not compatible with BlazeEncryptions v1.x)\n2. Older Encryption Method (Less Secure, but compatible with BlazeEncryptions v1.x)\nPlease type 1 or 2 and press enter." << endl;
-			cin >> cryptMethod;
+			try {
+				cout << "Which Encryption Method would you like to use:\n1. Newer Encryption Method (More Secure, but not compatible with BlazeEncryptions v1.x)\n2. Older Encryption Method (Less Secure, but compatible with BlazeEncryptions v1.x)\nPlease type 1 or 2 and press enter." << endl;
+				getline(cin, cryptMethod);
+				if (stoi(cryptMethod) != 1 && stoi(cryptMethod) != 2) throw 1;
+			}
+			catch (...) {
+				cout << "Unrecognized Option: '" + cryptMethod + "'. \n";
+				main(2, argv);
+			}
 			if (stoi(cryptMethod) == 1) {
 				New::encrypt();
 				return 0;
@@ -56,8 +63,15 @@ int main(int argc, char** argv) {
 			}
 		}
 		if (arg == "--decrypt") {
-			cout << "Are you decrypting for:\n1. The Newer Encryption Method \n2. The Older Encryption Method\nPlease type 1 or 2 and press enter." << endl;
-			cin >> cryptMethod;
+			try {
+				cout << "Are you decrypting for:\n1. The Newer Encryption Method \n2. The Older Encryption Method\nPlease type 1 or 2 and press enter." << endl;
+				getline(cin, cryptMethod);
+				if (stoi(cryptMethod) != 1 && stoi(cryptMethod) != 2) throw 1;
+			}
+			catch (...) {
+				cout << "Unrecognized Option: '" + cryptMethod + "'. \n";
+				main(2, argv);
+			}
 			if (stoi(cryptMethod) == 1) {
 				New::decrypt();
 				return 0;
@@ -87,22 +101,26 @@ int main(int argc, char** argv) {
 		}
 	}
 	cout << VERSION << endl;
-	cout << "Which Encryption Method would you like to use:\n1. Newer Encryption Method (More Secure, but not compatible with BlazeEncryptions v1.x)\n2. Older Encryption Method (Less Secure, but compatible with BlazeEncryptions v1.x)\n3. Quit the Program\nPlease type 1, 2, or 3 and press enter." << endl;
-	cin >> cryptMethod;
-	if (cryptMethod == "1") {
+	try {
+		cout << "Which Encryption Method would you like to use:\n1. Newer Encryption Method (More Secure, but not compatible with BlazeEncryptions v1.x)\n2. Older Encryption Method (Less Secure, but compatible with BlazeEncryptions v1.x)\n3. Quit the Program\nPlease type 1, 2, or 3 and press enter." << endl;
+		getline(cin, cryptMethod);
+		if (stoi(cryptMethod) != 1 && stoi(cryptMethod) != 2 && stoi(cryptMethod) != 3) throw 1;
+	}
+	catch (...) {
+		cout << "Unrecognized Option: '" + cryptMethod + "'. \n";
+		main(NULL, NULL);
+		return 0;
+	}
+	if (stoi(cryptMethod) == 1) {
 		New::New();
 		return 0;
 	}
-	if (cryptMethod == "2") {
+	if (stoi(cryptMethod) == 2) {
 		old::old();
 		return 0;
 	}
-	if (cryptMethod == "3") {
+	if (stoi(cryptMethod) == 3) {
 		return 2;
-	}
-	else {
-		cout << "Unrecognized Option: '" + cryptMethod + "'. \n";
-		main(NULL, NULL);
 	}
 }
 

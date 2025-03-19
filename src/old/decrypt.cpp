@@ -11,13 +11,21 @@ int old::decrypt() {
 	string alphabet = "abcdefghijklmnopqrstuvwxyz";
 	string ualphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	string newMessage, message;
-	int key, type;
-	cout << "Do you want to\n1. Decrypt a text file\n2. Decrypt a message\nPlease type 1 or 2 and press enter." << endl;
-	cin >> type;
-	if (type == 1) {
+	int key;
+	string type;
+	try {
+		cout << "Do you want to\n1. Decrypt a text file\n2. Decrypt a message\nPlease type 1 or 2 and press enter." << endl;
+		getline(cin, type);
+		if (stoi(type) != 1 && stoi(type) != 2) throw 1;
+	}
+	catch (...) {
+		cout << "Unrecognized Option: '" + type + "'. ";
+		decrypt();
+		return 0;
+	}
+	if (stoi(type) == 1) {
 		string fileLocation;
 		cout << "What is the name or path of the text file" << endl;
-		cin.ignore();
 		getline(cin, fileLocation);
 		cout << "Please enter the decryption key in number form to decrypt the text file?" << endl;
 		cin >> key;
@@ -26,7 +34,6 @@ int old::decrypt() {
 		if (!FileToDecrypt) {
 			while (!FileToDecrypt) {
 				cout << "Your file '" + fileLocation + "' doesn't exist. Please enter an existing filename." << endl;
-				cin.ignore();
 				getline(cin, fileLocation);
 				FileToDecrypt.open(fileLocation, ios::in);
 			}
@@ -92,7 +99,6 @@ int old::decrypt() {
 		}
 		if (!DecryptedFile) {
 			cout << "Could not create the decrypted file. Here is the decrypted text file '" + newMessage + "'\nPress ENTER to exit";
-			cin.ignore();
 			cin.get();
 			return 0;
 		}
@@ -105,7 +111,7 @@ int old::decrypt() {
 			return 0;
 		}
 	}
-	if (type == 2) {
+	if (stoi(type) == 2) {
 		cout << "Please enter a message to decrypt?" << endl;
 		cin.ignore();
 		getline(cin, message);
@@ -146,10 +152,6 @@ int old::decrypt() {
 		cin.ignore();
 		cin.get();
 		return 0;
-	}
-	else {
-		cout << "Unrecognized Option: '" + to_string(type) + "'. ";
-		decrypt();
 	}
 	return 0;
 }

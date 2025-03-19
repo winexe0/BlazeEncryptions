@@ -10,22 +10,26 @@
 #include "old.h"
 using namespace std;
 int old::old() {
-	int crypt;
-	cout << "What would you like to do\n1. Encrypt\n2. Decrypt\n3. Quit The Program\nPlease type 1, 2, or 3 and press enter." << endl;
-	cin >> crypt;
-	if (crypt == 1) {
+	string crypt;
+	try {
+		cout << "What would you like to do\n1. Encrypt\n2. Decrypt\n3. Quit The Program\nPlease type 1, 2, or 3 and press enter." << endl;
+		getline(cin, crypt);
+		if (stoi(crypt) != 1 && stoi(crypt) != 2 && stoi(crypt) != 3) throw 1;
+	}
+	catch (...) {
+		cout << "Unrecognized Option: '" + crypt + "'. \n";
+		old();
+		return 0;
+	}
+	if (stoi(crypt) == 1) {
 		encrypt();
 		return 0;
 	}
-	if (crypt == 2) {
+	if (stoi(crypt) == 2) {
 		decrypt();
 		return 0;
 	}
-	if (crypt == 3) {
+	if (stoi(crypt) == 3) {
 		return 0;
-	}
-	else {
-		cout << "Unrecognized Option: '" + to_string(crypt) + "'. \n";
-		old();
 	}
 }
