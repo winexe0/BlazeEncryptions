@@ -30,11 +30,11 @@ int New::decrypt() {
 		getline(cin, key);
 		fstream keyOpen;
 		keyOpen.open(key, ios::in);
-		if (!keyOpen) {
+		while (!keyOpen) {
 			keyOpen.open(key + ".txt", ios::in);
-			while (!keyOpen) {
+			if (!keyOpen) {
 				keyOpen.open(key + "0.txt", ios::in);
-				while (!keyOpen) {
+				if (!keyOpen) {
 					cout << "Your key '" + key + "' doesn't exist. Please enter an existing filename." << endl;
 					getline(cin, key);
 					keyOpen.open(key, ios::in);
@@ -140,11 +140,11 @@ int New::decrypt() {
 		getline(cin, key);
 		fstream keyOpen;
 		keyOpen.open(key, ios::in);
-		if (!keyOpen) {
+		while (!keyOpen) {
 			keyOpen.open(key + ".txt", ios::in);
-			while (!keyOpen) {
+			if (!keyOpen) {
 				keyOpen.open(key + "0.txt", ios::in);
-				while (!keyOpen) {
+				if (!keyOpen) {
 					cout << "Your key '" + key + "' doesn't exist. Please enter an existing filename." << endl;
 					getline(cin, key);
 					keyOpen.open(key, ios::in);

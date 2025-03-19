@@ -31,11 +31,11 @@ int New::encrypt() {
 		getline(cin, key);
 		fstream keyOpen;
 		keyOpen.open(key, ios::in);
-		if (!keyOpen) {
+		while (!keyOpen) {
 			keyOpen.open(key + ".txt", ios::in);
-			while (!keyOpen) {
+			if (!keyOpen) {
 				keyOpen.open(key + "0.txt", ios::in);
-				while (!keyOpen) {
+				if (!keyOpen) {
 					cout << "Your key '" + key + "' doesn't exist. Please enter an existing filename." << endl;
 					getline(cin, key);
 					keyOpen.open(key, ios::in);
@@ -51,6 +51,17 @@ int New::encrypt() {
 			//filesystem::path keylength(key);
 			keyOpen.close();
 			keyOpen.open(key, ios::in);
+			while (!keyOpen) {
+				keyOpen.open(key + ".txt", ios::in);
+				if (!keyOpen) {
+					keyOpen.open(key + "0.txt", ios::in);
+					if (!keyOpen) {
+						cout << "Your key '" + key + "' doesn't exist. Please enter an existing filename." << endl;
+						getline(cin, key);
+						keyOpen.open(key, ios::in);
+					}
+				}
+			}
 			while (getline(keyOpen, Keyline)) {
 				vector<string> row_values;
 				split(Keyline, '\t', row_values);
@@ -60,6 +71,17 @@ int New::encrypt() {
 			while (keyContents == "") {
 				keyOpen.close();
 				keyOpen.open(key + ".txt", ios::in);
+				while (!keyOpen) {
+					keyOpen.open(key + ".txt", ios::in);
+					if (!keyOpen) {
+						keyOpen.open(key + "0.txt", ios::in);
+						if (!keyOpen) {
+							cout << "Your key '" + key + "' doesn't exist. Please enter an existing filename." << endl;
+							getline(cin, key);
+							keyOpen.open(key, ios::in);
+						}
+					}
+				}
 				while (getline(keyOpen, Keyline)) {
 					vector<string> row_values;
 					split(Keyline, '\t', row_values);
@@ -72,6 +94,17 @@ int New::encrypt() {
 		if (bypass == false) {
 			keyOpen.close();
 			keyOpen.open(key, ios::in);
+			while (!keyOpen) {
+				keyOpen.open(key + ".txt", ios::in);
+				if (!keyOpen) {
+					keyOpen.open(key + "0.txt", ios::in);
+					if (!keyOpen) {
+						cout << "Your key '" + key + "' doesn't exist. Please enter an existing filename." << endl;
+						getline(cin, key);
+						keyOpen.open(key, ios::in);
+					}
+				}
+			}
 			while (getline(keyOpen, Keyline)) {
 				vector<string> row_values;
 				split(Keyline, '\t', row_values);
@@ -171,11 +204,11 @@ int New::encrypt() {
 		getline(cin, key);
 		fstream keyOpen;
 		keyOpen.open(key, ios::in);
-		if (!keyOpen) {
+		while (!keyOpen) {
 			keyOpen.open(key + ".txt", ios::in);
-			while (!keyOpen) {
+			if (!keyOpen) {
 				keyOpen.open(key + "0.txt", ios::in);
-				while (!keyOpen) {
+				if (!keyOpen) {
 					cout << "Your key '" + key + "' doesn't exist. Please enter an existing filename." << endl;
 					getline(cin, key);
 					keyOpen.open(key, ios::in);
@@ -192,6 +225,17 @@ int New::encrypt() {
 			//filesystem::path keylength(key);
 			keyOpen.close();
 			keyOpen.open(key, ios::in);
+			while (!keyOpen) {
+				keyOpen.open(key + ".txt", ios::in);
+				if (!keyOpen) {
+					keyOpen.open(key + "0.txt", ios::in);
+					if (!keyOpen) {
+						cout << "Your key '" + key + "' doesn't exist. Please enter an existing filename." << endl;
+						getline(cin, key);
+						keyOpen.open(key, ios::in);
+					}
+				}
+			}
 			while (getline(keyOpen, line)) {
 				vector<string> row_values;
 				split(line, '\t', row_values);
@@ -201,6 +245,17 @@ int New::encrypt() {
 			while (keyContents == "") {
 				keyOpen.close();
 				keyOpen.open(key + ".txt", ios::in);
+				while (!keyOpen) {
+					keyOpen.open(key + ".txt", ios::in);
+					if (!keyOpen) {
+						keyOpen.open(key + "0.txt", ios::in);
+						if (!keyOpen) {
+							cout << "Your key '" + key + "' doesn't exist. Please enter an existing filename." << endl;
+							getline(cin, key);
+							keyOpen.open(key, ios::in);
+						}
+					}
+				}
 				while (getline(keyOpen, line)) {
 					vector<string> row_values;
 					split(line, '\t', row_values);
@@ -213,6 +268,17 @@ int New::encrypt() {
 		if (bypass == false) {
 			keyOpen.close();
 			keyOpen.open(key, ios::in);
+			while (!keyOpen) {
+				keyOpen.open(key + ".txt", ios::in);
+				if (!keyOpen) {
+					keyOpen.open(key + "0.txt", ios::in);
+					if (!keyOpen) {
+						cout << "Your key '" + key + "' doesn't exist. Please enter an existing filename." << endl;
+						getline(cin, key);
+						keyOpen.open(key, ios::in);
+					}
+				}
+			}
 			while (getline(keyOpen, line)) {
 				vector<string> row_values;
 				split(line, '\t', row_values);
@@ -222,6 +288,17 @@ int New::encrypt() {
 			while (keyContents == "") {
 				keyOpen.close();
 				keyOpen.open(key + ".txt", ios::in);
+				while (!keyOpen) {
+					keyOpen.open(key + ".txt", ios::in);
+					if (!keyOpen) {
+						keyOpen.open(key + "0.txt", ios::in);
+						if (!keyOpen) {
+							cout << "Your key '" + key + "' doesn't exist. Please enter an existing filename." << endl;
+							getline(cin, key);
+							keyOpen.open(key, ios::in);
+						}
+					}
+				}
 				while (getline(keyOpen, line)) {
 					vector<string> row_values;
 					split(line, '\t', row_values);
