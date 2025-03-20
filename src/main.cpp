@@ -4,7 +4,7 @@
 #define USAGE "\
 Usage: BlazeEncryptions [--old] [--new] [--encrypt] [--decrypt] [--keygen] [--keystats] [-h] [--help] [--version]\n\
 Options: --old (Uses the older Encryption/Decryption method for compatibility with BlazeEncryptions v1.x and less secure)\n --new (Uses the Newer Encryption/Decryption method which is more secure but not compatible with v1.x)\n --keygen (Generate Encryption keys)\n --keystats KEYNAME (Shows statistics of an existing key which could be KEYNAME)\n --encrypt (Encrypt a message)\n --decrypt (Decrypt a message)\n --help or -h (Prints this exact messaage)\n --version (Prints out the version of this version of BlazeEncryptions)\n"
-#define COPYRIGHT "Copyright (c) 2023 winexe0 <aryan.chandna@icloud.com> Albert Nguyen <azero2113@gmail.com>"
+#define COPYRIGHT "Copyright (c) 2025 winexe0 <aryan.chandna@icloud.com> Albert Nguyen <azero2113@gmail.com>"
 #include <iostream>
 #include <string>
 #include <vector>
