@@ -21,7 +21,7 @@
 #include <thread>  
 #include <vector>  
 #include "keygen.h"
-#ifdef __SSE2__
+#ifdef __SSE2__ || _M_AMD64 || _M_X64
 #include <immintrin.h>
 #endif
 #ifdef __ARM_NEON
