@@ -21,8 +21,14 @@
 #include <thread>  
 #include <vector>  
 #include "keygen.h"
-#ifdef __SSE2__ || _M_AMD64 || _M_X64
+#ifdef __SSE2__
 #include <immintrin.h>
+#endif
+#ifdef _M_X64
+#include <intrin.h>
+#endif
+#ifdef _M_AMD64
+#include <intrin.h>
 #endif
 #ifdef __ARM_NEON
 #include <arm_neon.h>
