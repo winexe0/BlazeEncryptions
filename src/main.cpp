@@ -2,8 +2,8 @@
 //
 #define VERSION "BlazeEncryptions v3.1"
 #define USAGE "\
-Usage: BlazeEncryptions [--old] [--new] [--encrypt] [--decrypt] [--keygen] [--keystats] [-h] [--help] [--version]\n\
-Options: --old (Uses the older Encryption/Decryption method for compatibility with BlazeEncryptions v1.x and less secure)\n --new (Uses the Newer Encryption/Decryption method which is more secure but not compatible with v1.x)\n --keygen (Generate Encryption keys)\n --keystats KEYNAME (Shows statistics of an existing key which could be KEYNAME)\n --encrypt (Encrypt a message)\n --decrypt (Decrypt a message)\n --help or -h (Prints this exact messaage)\n --version (Prints out the version of this version of BlazeEncryptions)\n"
+Usage: BlazeEncryptions [--first] [--second] [--fourth] [--encrypt] [--decrypt] [--keygen] [--keystats] [-h] [--help] [--version]\n\
+Options: --first (Uses the 1.x Encryption Method)\n --second (Uses the 2.x-3.x Encryption Method)\n --fourth (Uses the 4.x Encryption Method)\n --keygen (Generate Encryption keys)\n --keystats KEYNAME (Shows statistics of an existing key which could be KEYNAME)\n --encrypt (Encrypt a message)\n --decrypt (Decrypt a message)\n --help or -h (Prints this exact messaage)\n --version (Prints out the version of this version of BlazeEncryptions)\n"
 #define COPYRIGHT "Copyright (c) 2025 winexe0 <aryan.chandna@icloud.com> Albert Nguyen <azero2113@gmail.com>"
 #include <iostream>
 #include <string>
@@ -12,14 +12,19 @@ Options: --old (Uses the older Encryption/Decryption method for compatibility wi
 #include <iterator>
 #include <sstream>
 #include "split.h"
-#include "new/new.h"
-#include "new/encrypt.h"
-#include "new/decrypt.h"
-#include "new/keygen.h"
-#include "new/keyinfo.h"
-#include "old/old.h"
-#include "old/decrypt.h"
-#include "old/encrypt.h"
+#include "1.x/old.h"
+#include "1.x/decrypt.h"
+#include "1.x/encrypt.h"
+#include "2.x-3.x/new.h"
+#include "2.x-3.x/encrypt.h"
+#include "2.x-3.x/decrypt.h"
+#include "2.x-3.x/keygen.h"
+#include "2.x-3.x/keyinfo.h"
+#include "4.x/new.h"
+#include "4.x/encrypt.h"
+#include "4.x/decrypt.h"
+#include "4.x/keygen.h"
+#include "4.x/keyinfo.h"
 using namespace std;
 int main(int argc, char** argv) {
 	string cryptMethod;
@@ -35,62 +40,101 @@ int main(int argc, char** argv) {
 			cout << COPYRIGHT << endl;
 			exit(0);
 		}
-		if (arg == "--old") {
-			old::old();
+		if (arg == "--first") {
+			first::first();
 			return 0;
 		}
-		if (arg == "--new") {
-			New::New();
+		if (arg == "--second") {
+			second::second();
+			return 0;
+		}
+		if (arg == "--fourth") {
+			fourth::fourth();
 			return 0;
 		}
 		if (arg == "--encrypt") {
 			try {
-				cout << "Which Encryption Method would you like to use:\n1. Newer Encryption Method (More Secure, but not compatible with BlazeEncryptions v1.x)\n2. Older Encryption Method (Less Secure, but compatible with BlazeEncryptions v1.x)\nPlease type 1 or 2 and press enter." << endl;
+				cout << "Are you using the:\n1. The 4.x Encryption Method\n2. The 2.x-3.x Encryption Method\n3. 1.x Encryption Method\nPlease type 1, 2, or 3 and press enter." << endl;
 				getline(cin, cryptMethod);
-				if (stoi(cryptMethod) != 1 && stoi(cryptMethod) != 2) throw 1;
+				if (stoi(cryptMethod) != 1 && stoi(cryptMethod) != 2 && stoi(cryptMethod) != 3) throw 1;
 			}
 			catch (...) {
 				cout << "Unrecognized Option: '" + cryptMethod + "'. \n";
 				main(2, argv);
 			}
 			if (stoi(cryptMethod) == 1) {
-				New::encrypt();
+				fourth::encrypt();
 				return 0;
 			}
 			if (stoi(cryptMethod) == 2) {
-				old::encrypt();
+				second::encrypt();
+				return 0;
+			}
+			if (stoi(cryptMethod) == 3) {
+				first::encrypt();
 				return 0;
 			}
 		}
 		if (arg == "--decrypt") {
 			try {
-				cout << "Are you decrypting for:\n1. The Newer Encryption Method \n2. The Older Encryption Method\nPlease type 1 or 2 and press enter." << endl;
+				cout << "Are you using the:\n1. The 4.x Encryption Method\n2. The 2.x-3.x Encryption Method\n3. 1.x Encryption Method\nPlease type 1, 2, or 3 and press enter." << endl;
 				getline(cin, cryptMethod);
-				if (stoi(cryptMethod) != 1 && stoi(cryptMethod) != 2) throw 1;
+				if (stoi(cryptMethod) != 1 && stoi(cryptMethod) != 2 && stoi(cryptMethod) != 3) throw 1;
 			}
 			catch (...) {
 				cout << "Unrecognized Option: '" + cryptMethod + "'. \n";
 				main(2, argv);
 			}
 			if (stoi(cryptMethod) == 1) {
-				New::decrypt();
+				fourth::decrypt();
 				return 0;
 			}
 			if (stoi(cryptMethod) == 2) {
-				old::decrypt();
+				second::decrypt();
+				return 0;
+			}
+			if (stoi(cryptMethod) == 3) {
+				first::decrypt();
 				return 0;
 			}
 		}
 		if (arg == "--keygen") {
-			keygen();
+			cout << "Which Encryption Method would you like to use:\n1. The 4.x Encryption Method\n2. The 2.x-3.x Encryption Method\nPlease type 1 or 2 and press enter." << endl;
+			getline(cin, cryptMethod);
+			if (stoi(cryptMethod) == 1) {
+				fourth::keygen();
+				return 0;
+			}
+			if (stoi(cryptMethod) == 2) {
+				second::keygen();
+				return 0;
+			}
 			return 0;
 		}
 		if (arg == "--keystats" && argc == 3) {
-			keyinfo(argv[2]);
+			cout << "Which Encryption Method would you like to use:\n1. The 4.x Encryption Method\n2. The 2.x-3.x Encryption Method\nPlease type 1 or 2 and press enter." << endl;
+			getline(cin, cryptMethod);
+			if (stoi(cryptMethod) == 1) {
+				fourth::keyinfo(argv[2]);
+				return 0;
+			}
+			if (stoi(cryptMethod) == 2) {
+				second::keyinfo(argv[2]);
+				return 0;
+			}
 			return 0;
 		}
 		if (arg == "--keystats") {
-			keyinfo("NULL");
+			cout << "Which Encryption Method would you like to use:\n1. The 4.x Encryption Method\n2. The 2.x-3.x Encryption Method\nPlease type 1 or 2 and press enter." << endl;
+			getline(cin, cryptMethod);
+			if (stoi(cryptMethod) == 1) {
+				fourth::keyinfo("NULL");
+				return 0;
+			}
+			if (stoi(cryptMethod) == 2) {
+				second::keyinfo("NULL");
+				return 0;
+			}
 			return 0;
 		}
 		else {
@@ -102,9 +146,9 @@ int main(int argc, char** argv) {
 	}
 	cout << VERSION << endl;
 	try {
-		cout << "Which Encryption Method would you like to use:\n1. Newer Encryption Method (More Secure, but not compatible with BlazeEncryptions v1.x)\n2. Older Encryption Method (Less Secure, but compatible with BlazeEncryptions v1.x)\n3. Quit the Program\nPlease type 1, 2, or 3 and press enter." << endl;
+		cout << "Which Encryption Method would you like to use:\n1. The 4.x Encryption Method\n2. The 2.x-3.x Encryption Method\n3. 1.x Encryption Method\n4. Quit the Program\nPlease type 1, 2, 3, or 4 and press enter." << endl;
 		getline(cin, cryptMethod);
-		if (stoi(cryptMethod) != 1 && stoi(cryptMethod) != 2 && stoi(cryptMethod) != 3) throw 1;
+		if (stoi(cryptMethod) != 1 && stoi(cryptMethod) != 2 && stoi(cryptMethod) != 3 && stoi(cryptMethod) != 4) throw 1;
 	}
 	catch (...) {
 		cout << "Unrecognized Option: '" + cryptMethod + "'. \n";
@@ -112,14 +156,18 @@ int main(int argc, char** argv) {
 		return 0;
 	}
 	if (stoi(cryptMethod) == 1) {
-		New::New();
+		fourth::fourth();
 		return 0;
 	}
 	if (stoi(cryptMethod) == 2) {
-		old::old();
+		second::second();
 		return 0;
 	}
 	if (stoi(cryptMethod) == 3) {
+		first::first();
+		return 0;
+	}
+	if (stoi(cryptMethod) == 4) {
 		return 2;
 	}
 }

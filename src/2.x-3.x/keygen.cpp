@@ -20,7 +20,7 @@
 #include <time.h>
 #include "keygen.h"
 using namespace std;
-int keygen() {
+int second::keygen() {
 	string numbers = "0123456789";
 	string keyNum;
 	string length;

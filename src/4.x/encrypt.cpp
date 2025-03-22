@@ -7,9 +7,9 @@
 #include "../split.h"
 #include "encrypt.h"
 #include "fileSize.h"
-int New::encrypt() {
-	string alphabet = "abcdefghijklmnopqrstuvwxyz";
-	string ualphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+#include "new.h"
+using namespace fourth;
+int fourth::encrypt() {
 	string newMessage, message, key;
 	string type;
 	try {
@@ -19,7 +19,7 @@ int New::encrypt() {
 	}
 	catch (...) {
 		cout << "Unrecognized Option: '" + type + "'. ";
-		New::encrypt();
+		encrypt();
 		return 0;
 	}
 	if (stoi(type) == 1) {
@@ -44,7 +44,7 @@ int New::encrypt() {
 		string Keyline, keyContents;
 		bool bypass = false;
 		//filesystem::path keylength(key);
-		while (fileLocation.size() > fileSize(key) || fileLocation.size() > fileSize(key + ".txt") || fileLocation.size() > fileSize(key + "0.txt")) {
+		while (fileLocation.size() > 2*fileSize(key) || fileLocation.size() > 2*fileSize(key + ".txt") || fileLocation.size() > 2*fileSize(key + "0.txt")) {
 			cout << "The key '" + key + "' is not long enough to encrypt your file '" + fileLocation + "'. Please specify a key of at least " + to_string(message.size()) + " in length." << endl;
 			getline(cin, key);
 			//filesystem::path keylength(key);
@@ -126,36 +126,25 @@ int New::encrypt() {
 			split(line, '\t', row_values);
 			for (auto v : row_values)
 				FileToEncryptContents += v;
-			for (int i = 0; i < FileToEncryptContents.size(); i++) {
+			for (unsigned long long i = 0; i < FileToEncryptContents.size(); i++) {
 				string keyContentsInt;
-				keyContentsInt = keyContents[i];
-				size_t letterPos = alphabet.find(FileToEncryptContents[i]);
-				size_t letterPosU = ualphabet.find(FileToEncryptContents[i]);
-				if (letterPos == string::npos && letterPosU == string::npos) {
+				keyContentsInt = keyContents[2*i];
+				size_t letterPos = characters.find(FileToEncryptContents[i]);
+				if (letterPos == string::npos) {
 					newMessage += FileToEncryptContents[i];
 				}
 				if (letterPos != string::npos) {
 					int newPosition;
-					newPosition = letterPos + stoi(keyContentsInt);
-					if (newPosition > alphabet.size()) {
-						newPosition = newPosition - alphabet.size();
+					newPosition = letterPos + 10*stoi(keyContentsInt);
+					keyContentsInt = to_string(stoi(keyContentsInt) + 1);
+					newPosition = newPosition + stoi(keyContentsInt);
+					if (newPosition > characters.size()) {
+						newPosition = newPosition - characters.size();
 					}
-					if (newPosition == 26) {
+					if (newPosition == 92) {
 						newPosition = 0;
 					}
-					int newCharacter = alphabet[newPosition];
-					newMessage += newCharacter;
-				}
-				if (letterPosU != string::npos) {
-					int newPosition;
-					newPosition = letterPosU + stoi(keyContentsInt);
-					if (newPosition > ualphabet.size()) {
-						newPosition = newPosition - ualphabet.size();
-					}
-					if (newPosition == 26) {
-						newPosition = 0;
-					}
-					int newCharacter = ualphabet[newPosition];
+					int newCharacter = characters[newPosition];
 					newMessage += newCharacter;
 				}
 			}
@@ -217,7 +206,7 @@ int New::encrypt() {
 		}
 		string line, keyContents;
 		bool bypass = false;
-		while (message.size() > fileSize(key) || message.size() > fileSize(key + ".txt") || message.size() > fileSize(key + "0.txt")) {
+		while (message.size() > 2*fileSize(key) || message.size() > 2*fileSize(key + ".txt") || message.size() > 2*fileSize(key + "0.txt")) {
 			cout << "The key '" + key + "' is not long enough to encrypt your message '" + message + "'. Please specify a key of at least " + to_string(message.size()) + " in length." << endl;
 			getline(cin, key);
 			keyOpen.close();
@@ -304,36 +293,25 @@ int New::encrypt() {
 				}
 			}
 		}
-		for (int i = 0; i < message.size(); i++) {
+		for (unsigned long long i = 0; i < message.size(); i++) {
 			string keyContentsInt;
-			keyContentsInt = keyContents[i];
-			size_t letterPos = alphabet.find(message[i]);
-			size_t letterPosU = ualphabet.find(message[i]);
-			if (letterPos == string::npos && letterPosU == string::npos) {
+			keyContentsInt = keyContents[2*i];
+			size_t letterPos = characters.find(message[i]);
+			if (letterPos == string::npos) {
 				newMessage += message[i];
 			}
 			if (letterPos != string::npos) {
 				int newPosition;
-				newPosition = letterPos + stoi(keyContentsInt);
-				if (newPosition > alphabet.size()) {
-					newPosition = newPosition - alphabet.size();
+				newPosition = letterPos + 10*stoi(keyContentsInt);
+				keyContentsInt = to_string(stoi(keyContentsInt) + 1);
+				newPosition = newPosition + stoi(keyContentsInt);
+				if (newPosition > characters.size()) {
+					newPosition = newPosition - characters.size();
 				}
-				if (newPosition == 26) {
+				if (newPosition == 92) {
 					newPosition = 0;
 				}
-				int newCharacter = alphabet[newPosition];
-				newMessage += newCharacter;
-			}
-			if (letterPosU != string::npos) {
-				int newPosition;
-				newPosition = letterPosU + stoi(keyContentsInt);
-				if (newPosition > ualphabet.size()) {
-					newPosition = newPosition - ualphabet.size();
-				}
-				if (newPosition == 26) {
-					newPosition = 0;
-				}
-				int newCharacter = ualphabet[newPosition];
+				int newCharacter = characters[newPosition];
 				newMessage += newCharacter;
 			}
 		}

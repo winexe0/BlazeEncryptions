@@ -4,7 +4,8 @@
 #include "fileSize.h"
 #include "keyinfo.h"
 using namespace std;
-int keyinfo(std::string keyName) {
+using namespace fourth;
+int fourth::keyinfo(std::string keyName) {
 	if (keyName == "NULL") {
 		cout << "What is the name of the key you want to analyze?" << endl;
 		getline(cin, keyName);
@@ -20,7 +21,7 @@ int keyinfo(std::string keyName) {
 			}
 		};
 		cout << "Statistics for key: " + keyName + "\n";
-		cout << "With this key it is possible to encrypt messages up to " << fileSize(keyName) << " characters long." << endl;
+		cout << "With this key it is possible to encrypt messages up to " << 2*fileSize(keyName) << " characters long." << endl;
 		cout << "Press ENTER to exit" << endl;
 		cin.get();
 		cin.ignore();
@@ -38,7 +39,7 @@ int keyinfo(std::string keyName) {
 			}
 		}
 		cout << "Statistics for key: " + keyName + "\n";
-		cout << "With this key it is possible to encrypt messages up to " << fileSize(keyName) << " characters long." << endl;
+		cout << "With this key it is possible to encrypt messages up to " << 2*fileSize(keyName) << " characters long." << endl;
 		cout << "Press ENTER to exit" << endl;
 		cin.get();
 		cin.ignore();

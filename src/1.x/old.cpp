@@ -9,7 +9,7 @@
 #include "decrypt.h"
 #include "old.h"
 using namespace std;
-int old::old() {
+int first::first() {
 	string crypt;
 	try {
 		cout << "What would you like to do\n1. Encrypt\n2. Decrypt\n3. Quit The Program\nPlease type 1, 2, or 3 and press enter." << endl;
@@ -18,15 +18,15 @@ int old::old() {
 	}
 	catch (...) {
 		cout << "Unrecognized Option: '" + crypt + "'. \n";
-		old();
+		first();
 		return 0;
 	}
 	if (stoi(crypt) == 1) {
-		encrypt();
+		first::encrypt();
 		return 0;
 	}
 	if (stoi(crypt) == 2) {
-		decrypt();
+		first::decrypt();
 		return 0;
 	}
 	if (stoi(crypt) == 3) {

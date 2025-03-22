@@ -6,10 +6,10 @@
 #include <sstream>
 #include "../split.h"
 #include "decrypt.h"
+#include "new.h"
 using namespace std;
-int New::decrypt() {
-	string alphabet = "abcdefghijklmnopqrstuvwxyz";
-	string ualphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+using namespace fourth;
+int fourth::decrypt() {
 	string newMessage, message, key;
 	string type;
 	try {
@@ -63,36 +63,25 @@ int New::decrypt() {
 			split(line, '\t', row_values);
 			for (auto v : row_values)
 				FileToDecryptContents += v;
-			for (int i = 0; i < FileToDecryptContents.size(); i++) {
+			for (unsigned long long i = 0; i < FileToDecryptContents.size(); i++) {
 				string keyContentsInt;
-				keyContentsInt = keyContents[i];
-				size_t letterPos = alphabet.find(FileToDecryptContents[i]);
-				size_t letterPosU = ualphabet.find(FileToDecryptContents[i]);
-				if (letterPos == string::npos && letterPosU == string::npos) {
+				keyContentsInt = keyContents[2*i];
+				size_t letterPos = characters.find(FileToDecryptContents[i]);
+				if (letterPos == string::npos) {
 					newMessage += FileToDecryptContents[i];
 				}
 				if (letterPos != string::npos) {
 					int newPosition;
-					newPosition = letterPos - stoi(keyContentsInt);
+					newPosition = letterPos - 10*stoi(keyContentsInt);
+					keyContentsInt = to_string(stoi(keyContentsInt) + 1);
+					newPosition = newPosition - stoi(keyContentsInt);
 					if (newPosition < 0) {
-						newPosition = newPosition + alphabet.size();
+						newPosition = characters.size() + newPosition;
 					}
-					if (newPosition == 26) {
+					if (newPosition == 92) {
 						newPosition = 0;
 					}
-					int newCharacter = alphabet[newPosition];
-					newMessage += newCharacter;
-				}
-				if (letterPosU != string::npos) {
-					int newPosition;
-					newPosition = letterPosU - stoi(keyContentsInt);
-					if (newPosition < 0) {
-						newPosition = newPosition + ualphabet.size();
-					}
-					if (newPosition == 26) {
-						newPosition = 0;
-					}
-					int newCharacter = ualphabet[newPosition];
+					int newCharacter = characters[newPosition];
 					newMessage += newCharacter;
 				}
 			}
@@ -158,36 +147,25 @@ int New::decrypt() {
 			for (auto v : row_values)
 				keyContents += v;
 		}
-		for (int i = 0; i < message.size(); i++) {
+		for (unsigned long long i = 0; i < message.size(); i++) {
 			string keyContentsInt;
-			keyContentsInt = keyContents[i];
-			size_t letterPos = alphabet.find(message[i]);
-			size_t letterPosU = ualphabet.find(message[i]);
-			if (letterPos == string::npos && letterPosU == string::npos) {
+			keyContentsInt = keyContents[2*i];
+			size_t letterPos = characters.find(message[i]);
+			if (letterPos == string::npos) {
 				newMessage += message[i];
 			}
 			if (letterPos != string::npos) {
 				int newPosition;
-				newPosition = letterPos - stoi(keyContentsInt);
+				newPosition = letterPos - 10*stoi(keyContentsInt);
+				keyContentsInt = to_string(stoi(keyContentsInt) + 1);
+				newPosition = newPosition - stoi(keyContentsInt);
 				if (newPosition < 0) {
-					newPosition = alphabet.size() + newPosition;
+					newPosition = characters.size() + newPosition;
 				}
-				if (newPosition == 26) {
+				if (newPosition == 92) {
 					newPosition = 0;
 				}
-				int newCharacter = alphabet[newPosition];
-				newMessage += newCharacter;
-			}
-			if (letterPosU != string::npos) {
-				int newPosition;
-				newPosition = letterPosU - stoi(keyContentsInt);
-				if (newPosition < 0) {
-					newPosition = ualphabet.size() + newPosition;
-				}
-				if (newPosition == 26) {
-					newPosition = 0;
-				}
-				int newCharacter = ualphabet[newPosition];
+				int newCharacter = characters[newPosition];
 				newMessage += newCharacter;
 			}
 		}

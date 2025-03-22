@@ -5,56 +5,56 @@
 #include <iterator>
 #include <sstream>
 #include "../split.h"
-#include "decrypt.h"
+#include "encrypt.h"
 using namespace std;
-int old::decrypt() {
+int first::encrypt() {
 	string alphabet = "abcdefghijklmnopqrstuvwxyz";
 	string ualphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	string newMessage, message;
-	int key;
 	string type;
+	int key;
 	try {
-		cout << "Do you want to\n1. Decrypt a text file\n2. Decrypt a message\nPlease type 1 or 2 and press enter." << endl;
+		cout << "Do you want to\n1. Encrypt a text file\n2. Encrypt a message\nPlease type 1 or 2 and press enter." << endl;
 		getline(cin, type);
 		if (stoi(type) != 1 && stoi(type) != 2) throw 1;
 	}
 	catch (...) {
 		cout << "Unrecognized Option: '" + type + "'. ";
-		decrypt();
+		encrypt();
 		return 0;
 	}
 	if (stoi(type) == 1) {
 		string fileLocation;
 		cout << "What is the name or path of the text file" << endl;
 		getline(cin, fileLocation);
-		cout << "Please enter the decryption key in number form to decrypt the text file?" << endl;
+		cout << "Please enter a encryption key in number form to encrypt the text file?" << endl;
 		cin >> key;
-		fstream FileToDecrypt;
-		FileToDecrypt.open(fileLocation, ios::in);
-		if (!FileToDecrypt) {
-			while (!FileToDecrypt) {
+		fstream FileToEncrypt;
+		FileToEncrypt.open(fileLocation, ios::in);
+		if (!FileToEncrypt) {
+			while (!FileToEncrypt) {
 				cout << "Your file '" + fileLocation + "' doesn't exist. Please enter an existing filename." << endl;
 				getline(cin, fileLocation);
-				FileToDecrypt.open(fileLocation, ios::in);
+				FileToEncrypt.open(fileLocation, ios::in);
 			}
 		}
-			string line, FileToDecryptContents;
-			while (getline(FileToDecrypt, line)) {
+			string line, FileToEncryptContents;
+			while (getline(FileToEncrypt, line)) {
 				vector<string> row_values;
 				split(line, '\t', row_values);
 				for (auto v : row_values)
-					FileToDecryptContents += v;
-				for (int i = 0; i < FileToDecryptContents.size(); i++) {
-					size_t letterPos = alphabet.find(FileToDecryptContents[i]);
-					size_t letterPosU = ualphabet.find(FileToDecryptContents[i]);
+					FileToEncryptContents += v;
+				for (int i = 0; i < FileToEncryptContents.size(); i++) {
+					size_t letterPos = alphabet.find(FileToEncryptContents[i]);
+					size_t letterPosU = ualphabet.find(FileToEncryptContents[i]);
 					if (letterPos == string::npos && letterPosU == string::npos) {
-						newMessage += FileToDecryptContents[i];
+						newMessage += FileToEncryptContents[i];
 					}
 					if (letterPos != string::npos) {
 						int newPosition;
-						newPosition = letterPos - key;
-						if (newPosition < 0) {
-							newPosition = newPosition + alphabet.size();
+						newPosition = letterPos + key;
+						if (newPosition > alphabet.size()) {
+							newPosition = newPosition - alphabet.size();
 						}
 						if (newPosition == 26) {
 							newPosition = 0;
@@ -64,9 +64,9 @@ int old::decrypt() {
 					}
 					if (letterPosU != string::npos) {
 						int newPosition;
-						newPosition = letterPosU - key;
-						if (newPosition < 0) {
-							newPosition = newPosition + ualphabet.size();
+						newPosition = letterPosU + key;
+						if (newPosition > ualphabet.size()) {
+							newPosition = newPosition - ualphabet.size();
 						}
 						if (newPosition == 26) {
 							newPosition = 0;
@@ -76,46 +76,46 @@ int old::decrypt() {
 					}
 				}
 			}
-		fstream DecryptedFile;
+		fstream EncryptedFile;
 		size_t DotPos = fileLocation.find('.');
 		string Final;
 		if (DotPos != string::npos) {
 			fileLocation[DotPos] = '-';
 			if (fileLocation[DotPos + 1] == 't') {
-				fileLocation[DotPos + 1] = 'D';
+				fileLocation[DotPos + 1] = 'E';
 				if (fileLocation[DotPos + 2] == 'x') {
-					fileLocation[DotPos + 2] = 'e';
+					fileLocation[DotPos + 2] = 'n';
 					if (fileLocation[DotPos + 3] == 't') {
 						fileLocation[DotPos + 3] = 'c';
-						DecryptedFile.open(fileLocation + "rypted.txt", ios::out);
+						EncryptedFile.open(fileLocation + "rypted.txt", ios::out);
 						Final = fileLocation + "rypted.txt";
 					}
 				}
 			}
 		}
 		if (DotPos == string::npos) {
-			DecryptedFile.open(fileLocation + "-Decrypted", ios::out);
-			Final = fileLocation + "-Decrypted";
+			EncryptedFile.open(fileLocation + "-Encrypted", ios::out);
+			Final = fileLocation + "-Encrypted";
 		}
-		if (!DecryptedFile) {
-			cout << "Could not create the decrypted file. Here is the decrypted text file '" + newMessage + "'\nPress ENTER to exit";
+		if (!EncryptedFile) {
+			cout << "Could not create the encrypted file. Here is the encrypted text file '" + newMessage + "'\nPress ENTER to exit";
+			cin.ignore();
 			cin.get();
 			return 0;
 		}
 		else {
-			DecryptedFile << newMessage;
-			DecryptedFile.close();
-			cout << "Your Decrypted File is saved to " + Final + "\nPress ENTER to exit";
+			EncryptedFile << newMessage;
+			EncryptedFile.close();
+			cout << "Your Encrypted File is saved to " + Final + "\nPress ENTER to exit";
 			cin.ignore();
 			cin.get();
 			return 0;
 		}
 	}
 	if (stoi(type) == 2) {
-		cout << "Please enter a message to decrypt?" << endl;
-		cin.ignore();
+		cout << "Please enter a message to encrypt?" << endl;
 		getline(cin, message);
-		cout << "Please enter a decryption key in number form to decrypt the message?" << endl;
+		cout << "Please enter a encryption key in number form to encrypt the message?" << endl;
 		cin >> key;
 		for (int i = 0; i < message.size(); i++) {
 			size_t letterPos = alphabet.find(message[i]);
@@ -125,9 +125,9 @@ int old::decrypt() {
 			}
 			if (letterPos != string::npos) {
 				int newPosition;
-				newPosition = letterPos - key;
-				if (newPosition < 0) {
-					newPosition = alphabet.size() + newPosition;
+				newPosition = letterPos + key;
+				if (newPosition > alphabet.size()) {
+					newPosition = newPosition - alphabet.size();
 				}
 				if (newPosition == 26) {
 					newPosition = 0;
@@ -137,9 +137,9 @@ int old::decrypt() {
 			}
 			if (letterPosU != string::npos) {
 				int newPosition;
-				newPosition = letterPosU - key;
-				if (newPosition < 0) {
-					newPosition = ualphabet.size() + newPosition;
+				newPosition = letterPosU + key;
+				if (newPosition > ualphabet.size()) {
+					newPosition = newPosition - ualphabet.size();
 				}
 				if (newPosition == 26) {
 					newPosition = 0;
@@ -148,7 +148,7 @@ int old::decrypt() {
 				newMessage += newCharacter;
 			}
 		}
-		cout << "Your decrypted message is '" + newMessage + "'\nPress ENTER to exit" << endl;
+		cout << "Your encrypted message is '" + newMessage + "'\nPress ENTER to exit" << endl;
 		cin.ignore();
 		cin.get();
 		return 0;

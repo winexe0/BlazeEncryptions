@@ -11,7 +11,8 @@
 #include "keyinfo.h"
 #include "new.h"
 using namespace std;
-int New::New() {
+using namespace second;
+int second::second() {
 	string crypt;
 	try {
 		cout << "What would you like to do\n1. Generate Encryption/Decryption Keys\n2. Encrypt\n3. Decrypt\n4. Analyze an existing key\n5. Quit The Program\nPlease type 1, 2, 3, or 4 and press enter." << endl;
@@ -20,7 +21,7 @@ int New::New() {
 	}
 	catch (...) {
 		cout << "Unrecognized Option: '" + crypt + "'. \n";
-		New();
+		second::second();
 		return 0;
 	}
 	if (stoi(crypt) == 1) {
@@ -28,11 +29,11 @@ int New::New() {
 		return 0;
 	}
 	if (stoi(crypt) == 2) {
-		New::encrypt();
+		encrypt();
 		return 0;
 	}
 	if (stoi(crypt) == 3) {
-		New::decrypt();
+		decrypt();
 		return 0;
 	}
 	if (stoi(crypt) == 4) {

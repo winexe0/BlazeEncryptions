@@ -1,4 +1,4 @@
 #pragma once
-namespace New {
+namespace fourth {
 	int encrypt();
 }

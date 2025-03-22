@@ -3,7 +3,7 @@
 #include <string>
 #include "fileSize.h"
 using namespace std;
-int fileSize(std::string add) {
+int fourth::fileSize(std::string add) {
     ifstream mySource;
     mySource.open(add, ios_base::binary);
     mySource.seekg(0, ios_base::end);
