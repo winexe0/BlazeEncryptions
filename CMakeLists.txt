@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.15)
 # Name of the project
 project(BlazeEncryptions)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 11)
 
 # Add all the source files needed to build the executable
 add_executable(BlazeEncryptions 
