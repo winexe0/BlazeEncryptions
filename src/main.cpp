@@ -11,6 +11,11 @@ Options: --first (Uses the 1.x Encryption Method)\n --second (Uses the 2.x-3.x E
 #include <fstream>
 #include <iterator>
 #include <sstream>
+#define VISTA false // For non-Windows systems
+#ifdef _WIN32
+#include <VersionHelpers.h>
+#define VISTA !IsWindowsVistaSP2OrGreater()
+#endif // _WIN32
 #include "split.h"
 #include "1.x/old.h"
 #include "1.x/decrypt.h"
@@ -28,6 +33,10 @@ Options: --first (Uses the 1.x Encryption Method)\n --second (Uses the 2.x-3.x E
 using namespace std;
 int main(int argc, char** argv) {
 	string cryptMethod;
+	if (VISTA) {
+       cout << "BlazeEncryptions 3.x and greater requires Windows Vista SP2 or greater to run. Please upgrade your system to run BlazeEncryptions or use BlazeEncryptions 2.x" << endl;
+	   return 1;
+    }
 	for (int i = 1; i < argc; ++i) {
 		string arg = argv[i];
 		if (arg == "--help" || arg == "-h") {
