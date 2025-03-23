@@ -136,7 +136,7 @@ int fourth::encrypt() {
 				if (letterPos != string::npos) {
 					int newPosition;
 					newPosition = letterPos + 10*stoi(keyContentsInt);
-					keyContentsInt = to_string(stoi(keyContentsInt) + 1);
+					keyContentsInt = keyContents[i+1];
 					newPosition = newPosition + stoi(keyContentsInt);
 					if (newPosition > characters.size()) {
 						newPosition = newPosition - characters.size();
@@ -303,7 +303,7 @@ int fourth::encrypt() {
 			if (letterPos != string::npos) {
 				int newPosition;
 				newPosition = letterPos + 10*stoi(keyContentsInt);
-				keyContentsInt = to_string(stoi(keyContentsInt) + 1);
+				keyContentsInt = keyContents[i+1];
 				newPosition = newPosition + stoi(keyContentsInt);
 				if (newPosition > characters.size()) {
 					newPosition = newPosition - characters.size();

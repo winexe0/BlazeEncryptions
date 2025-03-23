@@ -73,7 +73,7 @@ int fourth::decrypt() {
 				if (letterPos != string::npos) {
 					int newPosition;
 					newPosition = letterPos - 10*stoi(keyContentsInt);
-					keyContentsInt = to_string(stoi(keyContentsInt) + 1);
+					keyContentsInt = keyContents[i+1];
 					newPosition = newPosition - stoi(keyContentsInt);
 					if (newPosition < 0) {
 						newPosition = characters.size() + newPosition;
@@ -157,7 +157,7 @@ int fourth::decrypt() {
 			if (letterPos != string::npos) {
 				int newPosition;
 				newPosition = letterPos - 10*stoi(keyContentsInt);
-				keyContentsInt = to_string(stoi(keyContentsInt) + 1);
+				keyContentsInt = keyContents[i+1];
 				newPosition = newPosition - stoi(keyContentsInt);
 				if (newPosition < 0) {
 					newPosition = characters.size() + newPosition;
