@@ -13,6 +13,7 @@ Options: --first (Uses the 1.x Encryption Method)\n --second (Uses the 2.x-3.x E
 #include <sstream>
 #ifdef _WIN32
 #include <Windows.h>
+#include <VersionHelpers.h>
 #define VISTA !IsWindowsVistaSP2OrGreater()
 #endif // _WIN32
 #ifdef __linux__
