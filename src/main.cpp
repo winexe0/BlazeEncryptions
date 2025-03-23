@@ -11,11 +11,16 @@ Options: --first (Uses the 1.x Encryption Method)\n --second (Uses the 2.x-3.x E
 #include <fstream>
 #include <iterator>
 #include <sstream>
-#define VISTA false // For non-Windows systems
 #ifdef _WIN32
 #include <VersionHelpers.h>
 #define VISTA !IsWindowsVistaSP2OrGreater()
 #endif // _WIN32
+#ifdef __linux__
+#define VISTA false // For non-Windows systems
+#endif // __linux__
+#ifdef __APPLE__
+#define VISTA false // For non-Windows systems
+#endif // __APPLE__
 #include "split.h"
 #include "1.x/old.h"
 #include "1.x/decrypt.h"
