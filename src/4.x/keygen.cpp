@@ -22,6 +22,7 @@
 #include <vector>  
 #include "keygen.h"
 using namespace std;
+unsigned long long current = 0;
 void generateKeys(int start, int end, const string& keyName, const string& length) {
     for (int i = start; i < end; i++) {
         fstream key;
@@ -37,6 +38,9 @@ void generateKeys(int start, int end, const string& keyName, const string& lengt
             status = OS
             int tempRandInt = (int)tempRandSingle % 10;
             tempRandTotal += to_string(tempRandInt);
+            current++;
+            cout << (double)(((double)current)/(2 * stoull(length)) * 100) << "%" << " Complete                 " << "\r";
+            cout.flush();
         }
         key << tempRandTotal;
         key.close();
