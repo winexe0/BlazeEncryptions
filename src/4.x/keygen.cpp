@@ -21,18 +21,6 @@
 #include <thread>  
 #include <vector>  
 #include "keygen.h"
-#ifdef __SSE2__
-#include <immintrin.h>
-#endif
-#ifdef _M_X64
-#include <intrin.h>
-#endif
-#ifdef _M_AMD64
-#include <intrin.h>
-#endif
-#ifdef __ARM_NEON
-#include <arm_neon.h>
-#endif
 using namespace std;
 void generateKeys(int start, int end, const string& keyName, const string& length) {
     for (int i = start; i < end; i++) {
@@ -43,52 +31,6 @@ void generateKeys(int start, int end, const string& keyName, const string& lengt
             key.open(keyName + to_string(i) + ".txt", ios::out);
         }
         string tempRandTotal;
-#ifdef __SSE2__
-        for (unsigned long long j = 0; j < 2 * stoull(length); j += 16) {
-            __m128i randomBytes;
-            unsigned char tempRand[16];
-            for (int k = 0; k < 16; k++) {
-				long status;
-                unsigned char tempRandSingle;
-                status = OS;
-                tempRand[k] = tempRandSingle;
-            }
-            randomBytes = _mm_loadu_si128((__m128i*)tempRand);
-            __m128i mod10 = _mm_set1_epi8(10);
-            __m128i quotient = _mm_setzero_si128();
-            __m128i product = _mm_setzero_si128();
-            __m128i digits = _mm_setzero_si128();
-            for (int k = 0; k < 16; k++) {
-                unsigned char byte = ((unsigned char*)&randomBytes)[k];
-                unsigned char q = byte / 10;
-                unsigned char r = byte % 10;
-                ((unsigned char*)&quotient)[k] = q;
-                ((unsigned char*)&digits)[k] = r;
-            }
-            for (int k = 0; k < 16; k++) {
-                tempRandTotal += to_string(((unsigned char*)&digits)[k]);
-            }
-        }
-#elif defined(__ARM_NEON)
-        for (unsigned long long j = 0; j < 2 * stoull(length); j += 16) {
-            uint8x16_t randomBytes;
-            uint8_t tempRand[16];
-            for (int k = 0; k < 16; k++) {
-                long status;
-                unsigned char tempRandSingle;
-                status = OS;
-                tempRand[k] = tempRandSingle;
-            }
-            randomBytes = vld1q_u8(tempRand);
-            uint8_t digits[16];
-            for (int k = 0; k < 16; k++) {
-                digits[k] = tempRand[k] % 10; 
-            }
-            for (int k = 0; k < 16; k++) {
-                tempRandTotal += to_string(digits[k]);
-            }
-        }
-#else
         for (unsigned long long j = 0; j < 2 * stoull(length); j++) {
             long status;
 			unsigned char tempRandSingle;
@@ -96,7 +38,6 @@ void generateKeys(int start, int end, const string& keyName, const string& lengt
             int tempRandInt = (int)tempRandSingle % 10;
             tempRandTotal += to_string(tempRandInt);
         }
-#endif
         key << tempRandTotal;
         key.close();
     }
