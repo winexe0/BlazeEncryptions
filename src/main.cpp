@@ -1,6 +1,6 @@
 // main.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
-#define VERSION "BlazeEncryptions v3.1"
+#define VERSION "BlazeEncryptions v4.0"
 #define USAGE "\
 Usage: BlazeEncryptions [--first] [--second] [--fourth] [--encrypt] [--decrypt] [--keygen] [--keystats] [-h] [--help] [--version]\n\
 Options: --first (Uses the 1.x Encryption Method)\n --second (Uses the 2.x-3.x Encryption Method)\n --fourth (Uses the 4.x Encryption Method)\n --keygen (Generate Encryption keys)\n --keystats KEYNAME (Shows statistics of an existing key which could be KEYNAME)\n --encrypt (Encrypt a message)\n --decrypt (Decrypt a message)\n --help or -h (Prints this exact messaage)\n --version (Prints out the version of this version of BlazeEncryptions)\n"
