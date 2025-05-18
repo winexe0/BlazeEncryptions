@@ -53,7 +53,7 @@ int old::decrypt() {
 					if (letterPos != string::npos) {
 						int newPosition;
 						newPosition = letterPos - key;
-						if (newPosition < 0) {
+						while (newPosition < 0) {
 							newPosition = newPosition + alphabet.size();
 						}
 						if (newPosition == 26) {
@@ -65,7 +65,7 @@ int old::decrypt() {
 					if (letterPosU != string::npos) {
 						int newPosition;
 						newPosition = letterPosU - key;
-						if (newPosition < 0) {
+						while (newPosition < 0) {
 							newPosition = newPosition + ualphabet.size();
 						}
 						if (newPosition == 26) {
@@ -126,7 +126,7 @@ int old::decrypt() {
 			if (letterPos != string::npos) {
 				int newPosition;
 				newPosition = letterPos - key;
-				if (newPosition < 0) {
+				while (newPosition < 0) {
 					newPosition = alphabet.size() + newPosition;
 				}
 				if (newPosition == 26) {
@@ -138,7 +138,7 @@ int old::decrypt() {
 			if (letterPosU != string::npos) {
 				int newPosition;
 				newPosition = letterPosU - key;
-				if (newPosition < 0) {
+				while (newPosition < 0) {
 					newPosition = ualphabet.size() + newPosition;
 				}
 				if (newPosition == 26) {

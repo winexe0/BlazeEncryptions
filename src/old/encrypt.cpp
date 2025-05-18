@@ -53,7 +53,7 @@ int old::encrypt() {
 					if (letterPos != string::npos) {
 						int newPosition;
 						newPosition = letterPos + key;
-						if (newPosition > alphabet.size()) {
+						while (newPosition > alphabet.size()) {
 							newPosition = newPosition - alphabet.size();
 						}
 						if (newPosition == 26) {
@@ -65,7 +65,7 @@ int old::encrypt() {
 					if (letterPosU != string::npos) {
 						int newPosition;
 						newPosition = letterPosU + key;
-						if (newPosition > ualphabet.size()) {
+						while (newPosition > ualphabet.size()) {
 							newPosition = newPosition - ualphabet.size();
 						}
 						if (newPosition == 26) {
@@ -126,7 +126,7 @@ int old::encrypt() {
 			if (letterPos != string::npos) {
 				int newPosition;
 				newPosition = letterPos + key;
-				if (newPosition > alphabet.size()) {
+				while (newPosition > alphabet.size()) {
 					newPosition = newPosition - alphabet.size();
 				}
 				if (newPosition == 26) {
@@ -138,7 +138,7 @@ int old::encrypt() {
 			if (letterPosU != string::npos) {
 				int newPosition;
 				newPosition = letterPosU + key;
-				if (newPosition > ualphabet.size()) {
+				while (newPosition > ualphabet.size()) {
 					newPosition = newPosition - ualphabet.size();
 				}
 				if (newPosition == 26) {
